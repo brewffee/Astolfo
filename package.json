@@ -1,0 +1,18 @@
+{
+  "name": "astolfo",
+  "version": "4.0.0-db12",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "geixco",
+  "license": "ISC",
+  "dependencies": {
+    "@naval-base/ms": "^3.1.0",
+    "enmap": "^5.8.2",
+    "nekos.life": "^2.0.7",
+    "node-fetch": "^2.6.1",
+    "require-all": "^3.0.0"
+  }
+}

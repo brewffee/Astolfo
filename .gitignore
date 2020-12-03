@@ -1,0 +1,4 @@
+
+.eslintrc.json
+auth/auth.json
+node_modules/*
