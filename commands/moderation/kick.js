@@ -5,25 +5,25 @@ module.exports.run = async (client, message, args) => {
     const errorEmbed = new MessageEmbed()
         .setColor('#f7b2d9')
         .setTitle('Uh oh!');
-
+    let memberID;
     if (!args[0]) {
-        errorEmbed.setDescription('No member specified.\nUsage: `a!kick <user> [reason]`');
+        errorEmbed.setDescription('No member specified.\nUsage: `a!kick <member> [reason]`');
         return message.channel.send(errorEmbed);
     } else if (args[0].startsWith('<@') && args[0].endsWith('>')) {
-        var memberID = args[0].toString().replace(/[^0-9]/g, '');
+        memberID = args[0].toString().replace(/[^0-9]/g, '');
         // return message.channel.send(`ggz, user was ${toBan_ID} (raw: \`${message.content}\`, to: \`${toBan_ID}\`)`);
     } else if (!args[0].startsWith('<@') && args[0].length == 18 && /[0-9]+$/.test(args[0])) {
-        var memberID = args[0].toString();
+        memberID = args[0].toString();
         // return message.channel.send(`ggz, id was ${toBan_ID} (raw: \`${message.content}\`, to: \`${toBan_ID}\`)`);
     }
     const toKick = await message.guild.members.cache.find(gm => gm.user.id == memberID);
     if (!toKick) {
-        errorEmbed.setDescription('Invalid member specified.\nUsage: `a!kick <user> [reason]`');
+        errorEmbed.setDescription('Invalid member specified.\nUsage: `a!kick <member> [reason]`');
         return message.channel.send(errorEmbed);
     }
-    var kickReason = args.toString().replace(`${args[0]}`, '').replace(/,/g, ' ');
+    let kickReason = args.toString().replace(`${args[0]}`, '').replace(/,/g, ' ');
     if (kickReason.length < 1) {
-        var kickReason = 'No reason provided';
+        kickReason = 'No reason provided';
     }
     if (!message.guild) {
         errorEmbed.setDescription('You\'re trying to use a guild-only command in a DM!');
@@ -52,11 +52,11 @@ module.exports.run = async (client, message, args) => {
         .setDescription(`Kicked ${toKick} from the server.\n\`\`\`${kickReason}\`\`\``)
         .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
 
-    toKick.kick();
-    return message.channel.send(kickEmbed)
+    toKick.kick()
         .catch(
             console.error,
             errorEmbed.setDescription('An unknown error occured whilst trying to run that command! Please try again in a few seconds.'),
             message.channel.send(errorEmbed),
         );
+    return message.channel.send(kickEmbed);
 };

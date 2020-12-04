@@ -1,8 +1,5 @@
 {
-    "version":"4.0.0-dev_b048",
+    "version":"4.0.0-dev_b062",
     "prefix": "a!",
-    "mention":"<@!779526520121065472>",
-    "botIsCool": true,
-    "disablePrefix": "-",
-    "errorEvent":""
+    "disablePrefix": "-"
 }

@@ -14,7 +14,7 @@
         "complete":"Authenticated.",
         "disconnected":"Disconnected."
     },
-    "event":
+    "ev":
     {
         "ready":["Astolfo@", " is ready!"],
         "listening":["Listening on ", " guilds!"],

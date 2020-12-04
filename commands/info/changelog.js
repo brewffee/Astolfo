@@ -1,7 +1,15 @@
 module.exports.run = async (client, message, args) => {
     const { MessageEmbed } = require('discord.js'),
         config = require('../../config/config.json');
-    if (!args[0] || args[0] == '12/3' || args[0] == 'v4-b048') {
+        // changelog = require('../../logs/entries.json');          soon(tm)
+    if (!args[0] || args[0] == '12/4' || args[0] == 'v4-b062') {
+        message.channel.send(
+            new MessageEmbed()
+                .setTitle('Changelog - December 4th, 2020')
+                .addField('(v4-b062) Lots of internal changes', '- Code no longer uses `var` :sunglasses:\n- Command and event handlers tweaked\n- Embed handling will be changed gradually\n- ')
+                .setFooter(`Astolfo ${config.version}`),
+        );
+    } else if (args[0] == '12/3' || args[0] == 'v4-b048') {
         message.channel.send(
             new MessageEmbed()
                 .setTitle('Changelog - December 3rd, 2020')
