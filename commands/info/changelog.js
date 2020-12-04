@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args) => {
         message.channel.send(
             new MessageEmbed()
                 .setTitle('Changelog - December 4th, 2020')
-                .addField('(v4-b062) Lots of internal changes', '- Code no longer uses `var` :sunglasses:\n- Command and event handlers tweaked\n- Embed handling will be changed gradually\n- ')
+                .addField('(v4-b062) Lots of internal changes', '- Code no longer uses `var` :sunglasses:\n- Command and event handlers tweaked\n- Embed handling will be changed gradually')
                 .setFooter(`Astolfo ${config.version}`),
         );
     } else if (args[0] == '12/3' || args[0] == 'v4-b048') {
