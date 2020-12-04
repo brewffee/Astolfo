@@ -14,9 +14,9 @@ module.exports.run = async (client, message, args) => {
     }
 
     message.channel.send(
-        new MessageEmbed()
+            new MessageEmbed()
         .setColor('#f7b2d9')
-        .setImage(`${gMember.user.displayAvatarURL({ size: 4096 })}`)
+        .setImage(`${gMember.user.displayAvatarURL({ size: 4096, dynamic: true })}`)
         .setTitle(`Avatar of ${gMember.user.username}`),
     );
 
