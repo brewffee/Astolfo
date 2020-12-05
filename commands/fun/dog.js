@@ -1,11 +1,11 @@
 module.exports.run = async (client, message) => {
     const fetch = require('node-fetch'),
         auth = require('../../auth/auth.json'),
-        { MessageEmbed } = require('discord.js');
+        em = require('discord.js').MessageEmbed;
     fetch(`https://api.tenor.com/v1/random?key=${auth.api.key.tenor}&locale=en_US&q=dog&limit=1`)
         .then(r => r.json())
         .then(q => message.channel.send(
-            new MessageEmbed()
+            new em()
                 .setColor('#f7b2d9')
                 .setTitle('Woof! :dog2:')
                 .setImage(q.results[0].media[0].gif.url)
@@ -16,14 +16,14 @@ module.exports.run = async (client, message) => {
             console.log(e);
             if (e.toString().startsWith('TypeError: Cannot read property \'media\' of undefined')) {
                 return message.channel.send(
-                    new MessageEmbed()
+                    new em()
                         .setColor('#f7b2d9')
                         .setTitle('Uh oh!')
                         .setDescription('Unable to find a puppy!'),
                 );
             } else {
                 return message.channel.send(
-                    new MessageEmbed()
+                    new em()
                         .setColor('#f7b2d9')
                         .setTitle('Uh oh!')
                         .setDescription('An error occured whilst running this command!'),

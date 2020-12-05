@@ -1,6 +1,6 @@
 module.exports.run = async (client, message, args) => {
-    const { MessageEmbed } = require('discord.js'),
-        errorEmbed = new MessageEmbed()
+    const em = require('discord.js').MessageEmbed,
+        errorEmbed = new em()
             .setColor('#f7b2d9')
             .setTitle('Uh oh!');
     let memberID;
@@ -44,7 +44,7 @@ module.exports.run = async (client, message, args) => {
     }
 
     // Execute ban
-    const banEmbed = new MessageEmbed()
+    const banEmbed = new em()
         .setColor('#f7b2d9')
         .setTitle('Member successfully banned.')
         .setDescription(`Banned ${toBan} from the server.\n\`\`\`${banReason}\`\`\``)
