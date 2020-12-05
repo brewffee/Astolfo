@@ -2,10 +2,11 @@ module.exports.run = async (client, message, args) => {
     const em = require('discord.js').MessageEmbed,
         config = require('../../config/config.json');
     // changelog = require('../../logs/entries.json');          soon(tm)
-    if (!args[0] || args[0] == '12/5' || args[0] == 'v4-b068') {
+    if (!args[0] || args[0] == '12/5' || args[0] == 'v4-b068' || args[0] == 'v4-b069') {
         message.channel.send(
             new em()
-                .setTitle('Changelog - December 4th, 2020')
+                .setTitle('Changelog - December 5th, 2020')
+                .addField('(v4-b069) Say command fixes', '- Added error handling')
                 .addField('(v4-b068) Internal changes + bug fixes', '- All commands use `new em()`\n- Avatar command fixed\n- Say should now work with mentions')
                 .setFooter(`Astolfo ${config.version}`),
         );
