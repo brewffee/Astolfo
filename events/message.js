@@ -13,4 +13,4 @@ module.exports = (client, message) => {
 	// 	console.log(`${con.R}Request: "${commandName}", "${args.join(' ')}"`);
 	// }
 	command.run(client, message, args);
-  };
+};
