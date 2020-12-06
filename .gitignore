@@ -2,3 +2,5 @@
 .eslintrc.json
 auth/auth.json
 node_modules/*
+package.json
+pnpm-lock.yaml
