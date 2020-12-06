@@ -6,12 +6,11 @@ module.exports = (client, message) => {
 		commandName = args.shift().toLowerCase(),
 		command = client.commandMap.get(commandName);
 	if (message.author.bot || msg.indexOf(prefix) !== 0 || !command) return;
-	/* rqr
-	if (args.join(' ').length < 1) {
-		console.log(`${con.R}Request: "${commandName}"`);
-	} else {
-		console.log(`${con.R}Request: "${commandName}", "${args.join(' ')}"`);
-	}
-	*/
+	// Debug purposes only
+	// if (args.join(' ').length < 1) {
+	// 	console.log(`${con.R}Request: "${commandName}"`);
+	// } else {
+	// 	console.log(`${con.R}Request: "${commandName}", "${args.join(' ')}"`);
+	// }
 	command.run(client, message, args);
   };
