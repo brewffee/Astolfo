@@ -1,10 +1,9 @@
 module.exports.run = async (client, message, args) => {
     const fetch = require('node-fetch'),
-        auth = require('../../auth/auth.json'),
-        em = require('discord.js').MessageEmbed;
+        auth = require('../../auth/auth.json');
     if (args.join(' ').length < 1) {
         return message.channel.send(
-            new em()
+            new (require('discord.js').MessageEmbed)()
                 .setColor('#f7b2d9')
                 .setTitle('Uh oh!')
                 .setDescription('An error occured whilst running this command!'),
@@ -13,7 +12,7 @@ module.exports.run = async (client, message, args) => {
     fetch(`https://api.tenor.com/v1/random?key=${auth.api.key.tenor}&locale=en_US&q=${args.join('%20')}&limit=1`)
         .then(r => r.json())
         .then(q => message.channel.send(
-            new em()
+            new (require('discord.js').MessageEmbed)()
                 .setColor('#f7b2d9')
                 .setTitle(`Result for '${args.join(' ')}'`)
                 .setImage(q.results[0].media[0].gif.url)
@@ -24,14 +23,14 @@ module.exports.run = async (client, message, args) => {
             console.log(e);
             if (e.toString().startsWith('TypeError: Cannot read property \'media\' of undefined')) {
                 return message.channel.send(
-                    new em()
+                    new (require('discord.js').MessageEmbed)()
                         .setColor('#f7b2d9')
                         .setTitle('Uh oh!')
                         .setDescription('Failed to find a gif that matched your query!'),
-                    );
+                );
             } else {
                 return message.channel.send(
-                    new em()
+                    new (require('discord.js').MessageEmbed)()
                         .setColor('#f7b2d9')
                         .setTitle('Uh oh!')
                         .setDescription('An error occured whilst running this command!'),

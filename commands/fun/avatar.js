@@ -1,5 +1,4 @@
 module.exports.run = async (client, message, args) => {
-    const em = require('discord.js').MessageEmbed;
     let memberID;
     if (!args[0]) {
         memberID = message.author.id;
@@ -11,7 +10,7 @@ module.exports.run = async (client, message, args) => {
     const gMember = await message.guild.members.cache.find(gm => gm.user.id == memberID);
     if (!gMember) {
         return message.channel.send(
-            new em()
+            new (require('discord.js').MessageEmbed)()
                 .setColor('#f7b2d9')
                 .setTitle('Uh oh!')
                 .setDesctiption('a!avatar [member]'),
@@ -19,7 +18,7 @@ module.exports.run = async (client, message, args) => {
     }
 
     message.channel.send(
-        new em()
+        new (require('discord.js').MessageEmbed)()
             .setColor('#f7b2d9')
             .setImage(`${gMember.user.displayAvatarURL({ size: 4096, dynamic: true })}`)
             .setTitle(`Avatar of ${gMember.user.username}`),

@@ -1,8 +1,5 @@
-/* eslint-disable no-redeclare */
-const em = require('discord.js').MessageEmbed;
-
 module.exports.run = async (client, message, args) => {
-    const errorEmbed = new em()
+    const errorEmbed = new (require('discord.js').MessageEmbed)()
         .setColor('#f7b2d9')
         .setTitle('Uh oh!');
     let memberID;
@@ -46,7 +43,7 @@ module.exports.run = async (client, message, args) => {
     }
 
     // Execute kick
-    const kickEmbed = new em()
+    const kickEmbed = new (require('discord.js').MessageEmbed)()
         .setColor('#f7b2d9')
         .setTitle('Member successfully kicked.')
         .setDescription(`Kicked ${toKick} from the server.\n\`\`\`${kickReason}\`\`\``)
