@@ -2,7 +2,7 @@ module.exports.run = async (client, message, args) => {
     const em = require('discord.js').MessageEmbed,
         config = require('../../config/config.json');
     // changelog = require('../../logs/entries.json');          soon(tm)
-    if (!args[0] || args[0] == '12/5' || args[0] == 'v4-b068' || args[0] == 'v4-b069') {
+    if (!args[0] || args[0] == '12/5' || args[0] == 'v4-b068' || args[0] == 'v4-b069' || args[0] == 'v4-b083') {
         message.channel.send(
             new em()
                 .setTitle('Changelog - December 5th, 2020')
