@@ -6,6 +6,7 @@ module.exports.run = async (client, message, args) => {
         message.channel.send(
             new em()
                 .setTitle('Changelog - December 5th, 2020')
+                .addField('(v4-b083) Uptime command', '- Added `v4uptime`')
                 .addField('(v4-b069) Say command fixes', '- Added error handling')
                 .addField('(v4-b068) Internal changes + bug fixes', '- All commands use `new em()`\n- Avatar command fixed\n- Say should now work with mentions')
                 .setFooter(`Astolfo ${config.version}`),
