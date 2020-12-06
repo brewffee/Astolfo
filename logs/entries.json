@@ -1,0 +1,83 @@
+{	"entry":
+	{
+		"b094": 
+		{
+			"head":"(v4-b094) Clean changelogs + eval",
+			"body":"- Created a JSON file for logs\n- Added `eval` (only usable by bot owner & when testing)",
+			"date":"Changelog - December 6th, 2020"
+		},
+		"b083": 
+		{
+			"head":"(v4-b083) Uptime command",
+			"body":"- Added `v4uptime`",
+			"date":"Changelog - December 5th, 2020"
+		},
+		"b069": 
+		{
+			"head":"(v4-b069) Say command fixes",
+			"body":"- Added error handling",
+			"date":"Changelog - December 5th, 2020"
+		},
+		"b068": 
+		{
+			"head":"(v4-b068) Internal changes + bug fixes",
+			"body":"- All commands use `em()`\n- Avatar command fixed\n- Say should now work with mentions",
+			"date":"Changelog - December 5th, 2020"
+		},
+		"b064": 
+		{
+			"head":"(v4-b064) Commands imported from v3",
+			"body":"- Added `v3invite`, `v3say`",
+			"date":"Changelog - December 4th, 2020"
+		},
+
+		"b062": 
+		{
+			"head":"(v4-b062) Lots of internal changes",
+			"body":"- Code no longer uses `var` :sunglasses:\n- Command and event handlers tweaked\n- Error handling should be better",
+			"date":"Changelog - December 4th, 2020"
+		},
+		"b048": 
+		{
+			"head":"(v4-b048) Internal changes",
+			"body":"- Cleaned up a bunch of code",
+			"date":"Changelog - December 3rd, 2020"
+		},
+		"b045": 
+		{
+			"head":"(v4-b045) Change GIF retrieval method",
+			"body":"- GIF commands now send files, not links",
+			"date":"Changelog - December 2nd, 2020"
+		},
+		"b037": 
+		{
+			"head":"(v4-b037) GIF commands to v4",
+			"body":"- Upgraded gif commands to match v4style",
+			"date":"Changelog - December 2nd, 2020"
+		},
+		"b035": 
+		{
+			"head":"(v4-b035) More GIFs",
+			"body":"- Implemented `v4gif` + `dog` and `v4cat`",
+			"date":"Changelog - December 2nd, 2020"
+		},
+		"b031": 
+		{
+			"head":"(v4-b031) Avatar command",
+			"body":"- Implemented ~~v3avatar~~ `v4avatar` complete\n- Fixed a few bugs with using no args",
+			"date":"Changelog - December 2nd, 2020"
+		},
+		"b025": 
+		{
+			"head":"(v4-b025) Patch",
+			"body":"- Fixed error with `upcoming` and `changelog` not sending",
+			"date":"Changelog - December 1st, 2020"
+		},
+		"b024": 
+		{
+			"head":"- Ban and kick commands finally polished;\n- `changelog` and `upcoming` added to track bot changes",
+			"body":"(v4-b024) v4 Ban/Kick commands + changelog",
+			"date":"Changelog - December 1st, 2020"
+		}
+	}
+}
