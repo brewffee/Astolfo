@@ -1,5 +1,11 @@
 {	"entry":
 	{
+		"b098": 
+		{
+			"head":"(v4-b096) Debug mode",
+			"body":"- Debug mode now toggleable via configuration file",
+			"date":"Changelog - December 8th, 2020"
+		},
 		"b096": 
 		{
 			"head":"(v4-b096) General changes",
