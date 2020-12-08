@@ -1,5 +1,11 @@
 {	"entry":
 	{
+		"b096": 
+		{
+			"head":"(v4-b096) General changes",
+			"body":"- Prefix no longer case-sensitive",
+			"date":"Changelog - December 8th, 2020"
+		},
 		"b094": 
 		{
 			"head":"(v4-b094) Clean changelogs + eval",
