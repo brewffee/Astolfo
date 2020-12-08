@@ -3,7 +3,7 @@ module.exports = (client, message) => {
 		// { con } = require('../config/language.json'),
 		args = message.content.slice(prefix.length).trim().split(/ +/g),
 		command = client.commandMap.get(args.shift().toLowerCase());
-	if (message.author.bot || !message.content.indexOf(prefix) === 0 || !command) return;
+	if (message.author.bot || !message.content.indexOf(prefix.toLowerCase()) === 0 || !command) return;
 	// Debug purposes only
 	// if (args.join(' ').length < 1) {
 	// 	console.log(`${con.R}Request: "${args.shift().toLowerCase(),}"`);
