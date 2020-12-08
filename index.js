@@ -39,10 +39,9 @@ groupN.forEach(group => {
 		}
 		cmds.forEach(file => {
 			if (!file.endsWith('.js') || file.startsWith(config.disablePrefix)) return;
-			const source = require(`./commands/${group}/${file}`),
-				command = file.split('.')[0];
+			const command = file.split('.')[0];
 			try {
-				client.commandMap.set(command, source);
+				client.commandMap.set(command, require(`./commands/${group}/${file}`));
 				setTimeout(() => { console.log(`${con.OK}Loaded command ${group.toUpperCase()}:${command.toUpperCase()}!`); }, 3000);
 			} catch { return setTimeout(() => { console.log(`${con.ERR}failed to load command ${command.toUpperCase()}`); }, 3000); }
 
