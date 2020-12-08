@@ -20,6 +20,12 @@ fs.readdir('./events/', (err, events) => {
 		} catch { return setTimeout(() => { console.log(`${con.ERR}Failed to load event ${clientEvent.toUpperCase()}!`); }, 1000); }
 	});
 });
+
+if (config.debug == true) {
+	// Creating event files for debug mode is less convenient
+	client.on('debug', console.log)
+	.on('warn', console.log);
+}
 // COMMANDS ===============================================
 const groupN = [
 	'fun',
