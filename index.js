@@ -1,7 +1,7 @@
 'use strict';
 
 const Discord = require('discord.js'),
-	map = require('enmap'),
+	Map = require('enmap'),
 	auth = require('./auth/auth.json'),
 	{ con, ev, net } = require('./config/language.json'),
 	config = require('./config/config.json'),
@@ -27,33 +27,31 @@ fs.readdir('./events/', (err, events) => {
 if (config.debug) {
 	// Creating event files for debug mode is less convenient
 	client.on('debug', console.log)
-	.on('warn', console.log);
+		.on('warn', console.log);
 }
 // COMMANDS ===============================================
-const groupN = [
-	'fun',
-	'moderation',
-	'guild',
-	'nsfw',
-	'other',
-	'admin',
-	'info',
-];
-client.commandMap = new map();
-groupN.forEach(group => {
-	fs.readdir(`./commands/${group}`, (err, cmds) => {
-		if (err) {
-			console.log(`${con.ERR}Failed to load module ${group.toUpperCase()}: ${err.toString().substr(15)}`);
-			return process.exit();
-		}
-		cmds.forEach(file => {
-			if (!file.endsWith('.js') || file.startsWith(config.disablePrefix)) return;
-			const command = file.split('.')[0];
-			try {
-				client.commandMap.set(command, require(`./commands/${group}/${file}`));
-				setTimeout(() => { console.log(`${con.OK}Loaded command ${group.toUpperCase()}:${command.toUpperCase()}!`); }, 3000);
-			} catch { return setTimeout(() => { console.log(`${con.ERR}failed to load command ${command.toUpperCase()}`); }, 3000); }
+client.commandMap = new Map();
 
+fs.readdir('./commands/', (err, groupDir) => {
+	if (err) {
+		console.log(`${con.ERR}Reading command directory failed: ${err.toString().substr(15)}`);
+		return process.exit();
+	}
+	groupDir.forEach(group => {
+		fs.readdir(`./commands/${group}`, (err, commands) => {
+			if (err) {
+				console.log(`${con.ERR}Failed to load module ${group.toUpperCase()}: ${err.toString().substr(15)}`);
+				return process.exit();
+			}
+			commands.forEach(file => {
+				if (!file.endsWith('.js') || file.startsWith(config.disablePrefix)) return;
+				const command = file.split('.')[0];
+				try {
+					client.commandMap.set(command, require(`./commands/${group}/${file}`));
+					setTimeout(() => { console.log(`${con.OK}Loaded command ${group.toUpperCase()}:${command.toUpperCase()}!`); }, 3000);
+				} catch { return setTimeout(() => { console.log(`${con.ERR}failed to load command ${command.toUpperCase()}`); }, 3000); }
+
+			});
 		});
 	});
 });
