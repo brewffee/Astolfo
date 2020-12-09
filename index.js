@@ -9,7 +9,10 @@ const Discord = require('discord.js'),
 	client = new Discord.Client();
 // EVENTS =================================================
 fs.readdir('./events/', (err, events) => {
-	if (err) return console.error(err);
+	if (err) {
+		console.log(`${con.ERR}Reading event directory failed: ${err.toString().substr(15)}`);
+		return process.exit();
+	}
 	events.forEach(eventFile => {
 		const event = require(`./events/${eventFile}`),
 			clientEvent = eventFile.split('.')[0];
