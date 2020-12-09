@@ -1,5 +1,11 @@
 {	"entry":
 	{
+		"b103": 
+		{
+			"head":"(v4-b103) Better command handler",
+			"body":"- Groups can now be read from the command directory instead of being manually defined",
+			"date":"Changelog - December 9th, 2020"
+		},
 		"b098": 
 		{
 			"head":"(v4-b096) Debug mode",
