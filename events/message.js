@@ -4,7 +4,7 @@ module.exports = (client, message) => {
 		command = client.commandMap.get(args.shift().toLowerCase());
 	if (message.author.bot || !message.content.indexOf(config.prefix.toLowerCase()) === 0 || !command) return;
 
-	if (config.debug === true) {
+	if (config.debug) {
 		const { con } = require('../config/language.json');
 		if (args.join(' ').length < 1) {
 			console.log(`${con.R}Request: "${args.shift().toLowerCase()}"`);

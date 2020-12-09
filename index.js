@@ -21,7 +21,7 @@ fs.readdir('./events/', (err, events) => {
 	});
 });
 
-if (config.debug == true) {
+if (config.debug) {
 	// Creating event files for debug mode is less convenient
 	client.on('debug', console.log)
 	.on('warn', console.log);
@@ -64,5 +64,6 @@ process.on('SIGINT', () => {
 }).on('exit', () => {
 	console.log(`${con.OK}${ev.stopped}`);
 });
+
 
 client.login(auth.discord.token);
