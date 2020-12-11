@@ -1,5 +1,11 @@
 {	"entry":
 	{
+		"b124": 
+		{
+			"head":"(v4-b124) Softban command",
+			"body":"- Added softban command\n- New bugs found, see [this issue](https://github.com/geixco/Astolfo/issues/2)",
+			"date":"Changelog - December 11th, 2020"
+		},
 		"b121": 
 		{
 			"head":"(v4-b119) Unban command + bug fixes",
