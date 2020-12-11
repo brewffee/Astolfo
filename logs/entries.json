@@ -1,5 +1,11 @@
 {	"entry":
 	{
+		"b121": 
+		{
+			"head":"(v4-b119) Unban command + bug fixes",
+			"body":"- Unban command added\n- Addressed some bugs with ban command not stopping at errors",
+			"date":"Changelog - December 10th, 2020"
+		},
 		"b119": 
 		{
 			"head":"(v4-b119) Ban rewrite",
