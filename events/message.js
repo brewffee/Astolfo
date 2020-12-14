@@ -6,10 +6,13 @@ module.exports = (client, message) => {
 
 	if (config.debug) {
 		const { con } = require('../config/language.json');
-		if (args.join(' ').length < 1) {
-			console.log(`${con.R}Request: "${args.shift().toLowerCase()}"`);
+		let cmd;
+		if (!args[0]) {
+			cmd = message.content;
+			console.log(`${con.R}Request: "${cmd}"`);
 		} else {
-			console.log(`${con.R}Request: "${args.shift().toLowerCase()}", "${args.join(' ')}"`);
+			cmd = message.content.substr(0, message.content.indexOf(' '));
+			console.log(`${con.R}Request: "${cmd}", "${args.join(' ')}"`);
 		}
 	}
 
