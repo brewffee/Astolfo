@@ -2,5 +2,5 @@
     "version":"4.0.0-b125",
     "prefix": "a!",
     "disablePrefix": "-",
-    "debug": false
+    "debug": true
 }
