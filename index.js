@@ -58,6 +58,9 @@ fs.readdir('./commands/', (err, groupDir) => {
 // CONSOLE ===============================================
 setTimeout(() => { console.log(`${con.INFO}Finishing...`); }, 3500);
 process.on('SIGINT', () => {
+	client.guilds.cache.get('761203866732724225').channels.cache.get('787087630390919228').send(
+        new Discord.MessageEmbed().setTitle('Astolfo is shutting down...').setDescription(`Preparing to disconnect`).setColor('RED').setFooter(config.version)
+    );
 	console.log(`${con.LINE}${con.STOP}${ev.stopping}`);
 	client.destroy();
 	setTimeout(() => { console.log(`${con.OK}${net.disconnected}`); }, 700);
