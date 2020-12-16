@@ -4,7 +4,7 @@ module.exports.run = async (client, message) => {
         new (require('discord.js').MessageEmbed)()
             .setTitle('v4 Development Progress')
             .addField('Implemented Features', 'softban, unban, v4ban, v4kick, v4gif (generic, cat, dog), upcoming, changelog, v3avatar, v3invite, v4say, v4ping, cleanchangelog')
-            .addField('Planned Features', 'reminders, command flags, nick, purge, nekos (local db), mute, warn, promote, demote, v3commands, v4help, welcomer, music, osu')
+            .addField('Planned Features', 'reminders, command flags, nick, purge, nekos (local db), mute, warn, promote, demote, v3commands, v4help, welcomer, music, osu, hentai')
             .setFooter(`Astolfo ${config.version}`),
     );
 
