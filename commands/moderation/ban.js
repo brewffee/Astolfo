@@ -19,10 +19,14 @@ module.exports.run = async (client, message, args) => {
 
     // Find a GuildMember if all checks passed
     let isGlobal;
-    let toBan = await message.guild.members.cache.find(gm => gm.user.id == memberID);
-    if (!toBan) {
-        isGlobal = true;
-        toBan = memberID;
+    try {
+        toBan = await message.guild.members.fetch({ user: memberID, force: true, cache: false })
+    } catch (E) {
+        if (E.message === 'Unknown Member') {
+            // Declare a global user if no guild member was found
+            isGlobal = true;
+            toBan = memberID;
+        }
     }
 
     // Check for a banReason to associate the ban with
