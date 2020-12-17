@@ -7,16 +7,19 @@ module.exports.run = async (client, message, args) => {
     } else if (!args[0].startsWith('<@') && args[0].length == 18 && /[0-9]+$/.test(args[0])) {
         memberID = args[0].toString();
     }
-    const gMember = await message.guild.members.cache.find(gm => gm.user.id == memberID);
-    if (!gMember) {
-        return message.channel.send(
-            new (require('discord.js').MessageEmbed)()
-                .setColor('#f7b2d9')
-                .setTitle('Uh oh!')
-                .setDesctiption('a!avatar [member]'),
-        );
+    let gMember;
+    try {
+        gMember = await message.guild.members.fetch({ user: memberID, force: true, cache: false })
+    } catch (E) {
+        if (E.message === 'Unknown Member') {
+            return message.channel.send(
+                new (require('discord.js').MessageEmbed)()
+                    .setColor('#f7b2d9')
+                    .setTitle('Uh oh!')
+                    .setDescription('You can\'t get the avatar of someone who isn\'t in the server!')
+            );
+        }
     }
-
     message.channel.send(
         new (require('discord.js').MessageEmbed)()
             .setColor('#f7b2d9')
