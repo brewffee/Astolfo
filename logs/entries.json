@@ -1,5 +1,11 @@
 {	"entry":
 	{
+		"b138": 
+		{
+			"head":"(v4-b138) Fetch without cache",
+			"body":"- Commands dealing with user/member data no longer rely on cache",
+			"date":"Changelog - December 17th, 2020"
+		},
 		"b136": 
 		{
 			"head":"(v4-b136) Fixed kick + ping",
