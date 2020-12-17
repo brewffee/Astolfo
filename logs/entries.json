@@ -1,5 +1,11 @@
 {	"entry":
 	{
+		"b136": 
+		{
+			"head":"(v4-b136) Fixed kick + ping",
+			"body":"- Added ping command\n- Bugs fixes relating to [this issue](https://github.com/geixco/Astolfo/issues/2) have been applied in the kick command",
+			"date":"Changelog - December 17th, 2020"
+		},
 		"b124": 
 		{
 			"head":"(v4-b124) Softban command",
