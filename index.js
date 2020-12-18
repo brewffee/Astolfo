@@ -7,6 +7,7 @@ const Discord = require('discord.js'),
 	config = require('./config/config.json'),
 	fs = require('fs'),
 	client = new Discord.Client();
+
 // EVENTS =================================================
 fs.readdir('./events/', (err, events) => {
 	if (err) {
@@ -20,15 +21,19 @@ fs.readdir('./events/', (err, events) => {
 		try {
 			client.on(clientEvent, event.bind(null, client));
 			setTimeout(() => { console.log(`${con.OK}Loaded event ${clientEvent.toUpperCase()}!`); }, 1000);
-		} catch { return setTimeout(() => { console.log(`${con.ERR}Failed to load event ${clientEvent.toUpperCase()}!`); }, 1000); }
+		} catch { 
+			return setTimeout(() => { console.log(`${con.ERR}Failed to load event ${clientEvent.toUpperCase()}!`); }, 1000); 
+		}
 	});
 });
 
+// DEBUG ==================================================
 if (config.debug) {
 	// Creating event files for debug mode is less convenient
 	client.on('debug', console.log)
 		.on('warn', console.log);
 }
+
 // COMMANDS ===============================================
 client.commandMap = new Map();
 
@@ -49,18 +54,19 @@ fs.readdir('./commands/', (err, groupDir) => {
 				try {
 					client.commandMap.set(command, require(`./commands/${group}/${file}`));
 					setTimeout(() => { console.log(`${con.OK}Loaded command ${group.toUpperCase()}:${command.toUpperCase()}!`); }, 3000);
-				} catch { return setTimeout(() => { console.log(`${con.ERR}failed to load command ${command.toUpperCase()}`); }, 3000); }
-
+				} catch { 
+					return setTimeout(() => { console.log(`${con.ERR}failed to load command ${command.toUpperCase()}`); }, 3000); 
+				}
 			});
 		});
 	});
 });
+
 // CONSOLE ===============================================
 setTimeout(() => { console.log(`${con.INFO}Finishing...`); }, 3500);
 process.on('SIGINT', async() => {
 	const Discord = require('discord.js');
 	console.log(`${con.LINE}${con.STOP}${ev.stopping}`);
-
 	client.guilds.cache.get('761203866732724225').channels.cache.get('787087630390919228').send(
         new Discord.MessageEmbed().setTitle('Astolfo is shutting down...').setDescription(`Preparing to disconnect`).setColor('RED').setFooter(config.version)
     );
@@ -69,6 +75,5 @@ process.on('SIGINT', async() => {
 }).on('exit', () => {
 	console.log(`${con.OK}${ev.stopped}`);
 });
-
 
 client.login(auth.discord.token);
