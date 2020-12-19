@@ -1,7 +1,6 @@
 'use strict';
 
 const Discord = require('discord.js'),
-	Map = require('enmap'),
 	auth = require('./auth/auth.json'),
 	{ con, ev, net } = require('./config/language.json'),
 	config = require('./config/config.json'),
@@ -35,7 +34,7 @@ if (config.debug) {
 }
 
 // COMMANDS ===============================================
-client.commandMap = new Map();
+client.cmds = new Discord.Collection();
 
 fs.readdir('./commands/', (err, groupDir) => {
 	if (err) {
@@ -52,7 +51,7 @@ fs.readdir('./commands/', (err, groupDir) => {
 				if (!file.endsWith('.js') || file.startsWith(config.disablePrefix)) return;
 				const command = file.split('.')[0];
 				try {
-					client.commandMap.set(command, require(`./commands/${group}/${file}`));
+					client.cmds.set(command, require(`./commands/${group}/${file}`));
 					setTimeout(() => { console.log(`${con.OK}Loaded command ${group.toUpperCase()}:${command.toUpperCase()}!`); }, 3000);
 				} catch { 
 					return setTimeout(() => { console.log(`${con.ERR}failed to load command ${command.toUpperCase()}`); }, 3000); 
