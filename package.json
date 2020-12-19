@@ -1,7 +1,7 @@
 {
   "name": "astolfo",
   "version": "4.0.0-db139",
-  "description": "",
+  "description": "A cool little bot that I work on in my free time.",
   "main": "index.js",
   "scripts": {
     "start": "echo Starting... && node ."
