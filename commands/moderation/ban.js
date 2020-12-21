@@ -1,8 +1,17 @@
 module.exports.run = async (client, message, args) => {
+    // Create the embeds
     const errorEmbed = new (require('discord.js').MessageEmbed)()
         .setColor('#f7b2d9')
-        .setTitle('Uh oh!');
-    let memberID, isGlobal, toBan;
+        .setTitle('Uh oh!'),
+        banEmbed = new (require('discord.js').MessageEmbed)()
+            .setColor('#f7b2d9')
+            .setTitle('Member successfully banned.')
+            .setDescription(`Banned ${toBan} from the server.\n\`\`\`Reason: ${banReason}\`\`\``)
+            .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
+    // Define changing variables
+    let memberID, isGlobal, toBan,
+        banReason = args.join(' ').replace(args[0], '');
+    // Check for a GuildMember/User
     if (!args[0]) {
         // Check if no arguments were given
         return message.channel.send(errorEmbed.setDescription('Invalid usage.\nUsage: `a!ban <member> [reason]`'));
@@ -23,13 +32,11 @@ module.exports.run = async (client, message, args) => {
     } catch (E) {
         if (E.message === 'Unknown Member') {
             // Declare a global user if no guild member was found
-            isGlobal = true;
-            toBan = memberID;
+            isGlobal = true; toBan = memberID;
         }
     }
 
     // Check for a banReason to associate the ban with
-    let banReason = args.join(' ').replace(args[0], '');
     if (banReason.length < 1) {
         banReason = 'No reason provided';
     }
@@ -65,16 +72,6 @@ module.exports.run = async (client, message, args) => {
     // Ban the user if they are a GuildMember
 
     if (!isGlobal) {
-        // Check if the GuildMember is already banned (This shouldn't happen, but just in case)
-        const bans = await message.guild.fetchBans();
-        if (JSON.stringify(bans).includes(toBan)) { // Ban entry found, fella's already gone
-            return message.channel.send(errorEmbed.setDescription('That user is already banned!'));
-        } // else: No bans found, clapping time :)
-        const banEmbed = new (require('discord.js').MessageEmbed)()
-            .setColor('#f7b2d9')
-            .setTitle('Member successfully banned.')
-            .setDescription(`Banned ${toBan} from the server.\n\`\`\`Reason: ${banReason}\`\`\``)
-            .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
         // Attempt to ban the GuildMember, send error if failed.
         try {
             message.guild.members.ban(memberID, { days: 7, reason: banReason });
@@ -87,18 +84,13 @@ module.exports.run = async (client, message, args) => {
     } else {
         // Check if the user is banned
         const bans = await message.guild.fetchBans();
-        if (JSON.stringify(bans).includes(toBan)) { // Ban entry found, fella's already gone
+        if (JSON.stringify(bans).includes(toBan)) {
+            // Prevent banning of an already banned User
             return message.channel.send(errorEmbed.setDescription('That user is already banned!'));
-        } // else: No bans found, clapping time :)
-        // Create the ban embed
-        const banEmbed = new (require('discord.js').MessageEmbed)()
-            .setColor('#f7b2d9')
-            .setTitle('User successfully banned.')
-            .setDescription(`This user won't be able to join the guild.\n\`\`\`Reason: ${banReason}\`\`\``)
-            .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
-        // Attempt to ban the usert, send error if failed.
+        }
+        // Attempt to ban the user, send error if failed.
         try {
-            message.guild.members.ban(memberID, { days: 7, reason: banReason });
+            message.guild.members.ban({ user: memberID, days: 7, reason: banReason });
         } catch (error) {
             message.channel.send('Triggered isGlobal error'),
                 console.error,
