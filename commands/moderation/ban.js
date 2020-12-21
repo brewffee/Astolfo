@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
     let memberID;
     if (!args[0]) {
         // Check if no arguments were given
-        return message.channel.send(errorEmbed.setDescription('No member specified.\nUsage: `a!ban <member> [reason]`'));
+        return message.channel.send(errorEmbed.setDescription('Invalid usage.\nUsage: `a!ban <member> [reason]`'));
     } else if (args[0].startsWith('<@') && args[0].endsWith('>') && args[0].replace(/[^0-9]/g, '').length == 18) {
         // Check if given argument is a mention
         memberID = args[0].toString().replace(/[^0-9]/g, '');
@@ -14,13 +14,13 @@ module.exports.run = async (client, message, args) => {
         memberID = args[0].toString();
     } else {
         // Check if given argument does not match ID or mention format
-        return message.channel.send(errorEmbed.setDescription('Invalid member specified.\nUsage: `a!ban <member> [reason]`'));
+        return message.channel.send(errorEmbed.setDescription('Invalid user specified.\nUsage: `a!ban <member> [reason]`'));
     }
 
     // Find a GuildMember if all checks passed
-    let isGlobal;
+    let isGlobal, toBan;
     try {
-        toBan = await message.guild.members.fetch({ user: memberID, force: true, cache: false })
+        toBan = await message.guild.members.fetch({ user: memberID, force: true, cache: false });
     } catch (E) {
         if (E.message === 'Unknown Member') {
             // Declare a global user if no guild member was found
