@@ -2,7 +2,7 @@ module.exports.run = async (client, message, args) => {
     const errorEmbed = new (require('discord.js').MessageEmbed)()
         .setColor('#f7b2d9')
         .setTitle('Uh oh!');
-    let memberID;
+    let memberID, isGlobal, toBan;
     if (!args[0]) {
         // Check if no arguments were given
         return message.channel.send(errorEmbed.setDescription('Invalid usage.\nUsage: `a!ban <member> [reason]`'));
@@ -18,7 +18,6 @@ module.exports.run = async (client, message, args) => {
     }
 
     // Find a GuildMember if all checks passed
-    let isGlobal, toBan;
     try {
         toBan = await message.guild.members.fetch({ user: memberID, force: true, cache: false });
     } catch (E) {
