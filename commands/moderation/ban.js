@@ -4,7 +4,7 @@ module.exports.run = async (client, message, args) => {
         .setColor('#f7b2d9')
         .setTitle('Uh oh!');
     // Permission and context checks
-    if (!message.guild) {
+    if (!message.guild && message.channel.type === 'dm') {
         errorEmbed.setDescription('You\'re trying to use a guild-only command in a DM!');
         return message.channel.send(errorEmbed);
     } else if (!message.guild.member(message.author).hasPermission('BAN_MEMBERS')) {
