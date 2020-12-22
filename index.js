@@ -1,11 +1,11 @@
 'use strict';
 
-const Discord = require('discord.js'),
+const { Client, Collection, MessageEmbed } = require('discord.js'),
 	auth = require('./auth/auth.json'),
 	{ con, ev, net } = require('./config/language.json'),
 	config = require('./config/config.json'),
 	locate = require('fs').readdir,
-	client = new Discord.Client();
+	client = new Client();
 
 // EVENTS =================================================
 locate('./events/', (err, events) => {
@@ -34,7 +34,7 @@ if (config.debug) {
 }
 
 // COMMANDS ===============================================
-client.cmds = new Discord.Collection();
+client.cmds = new Collection();
 
 locate('./commands/', (err, groupDir) => {
 	if (err) {
@@ -66,7 +66,7 @@ setTimeout(() => { console.log(`${con.INFO}Finishing...`); }, 3500);
 process.on('SIGINT', async () => {
 	console.log(`${con.LINE}${con.STOP}${ev.stopping}`);
 	client.guilds.cache.get('761203866732724225').channels.cache.get('787087630390919228').send(
-		new Discord.MessageEmbed().setTitle('Astolfo is shutting down...').setDescription('Preparing to disconnect').setColor('RED').setFooter(config.version),
+		new MessageEmbed().setTitle('Astolfo is shutting down...').setDescription('Preparing to disconnect').setColor('RED').setFooter(config.version),
 	);
 
 	setTimeout(async () => {
