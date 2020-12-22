@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
     let memberID;
     if (!args[0]) {
         // Check if no arguments were given
-        memberID = message.author.id
+        memberID = message.author.id;
     } else if (args[1]) {
         // Check if too many arguments were given
         return message.channel.send(errorEmbed.setDescription('Invalid syntax.\nUsage: `a!avatar [member]`'));
@@ -23,7 +23,7 @@ module.exports.run = async (client, message, args) => {
     // Find a GuildMember if all checks passed
     let foundMember;
     try {
-        foundMember = await message.guild.members.fetch({ user: memberID, force: true, cache: false })
+        foundMember = await message.guild.members.fetch({ user: memberID, force: true, cache: false });
     } catch (E) {
         if (E.message === 'Unknown Member') {
             return message.channel.send(errorEmbed.setDescription('I can\'t get the avatar of a someone who isn\'t in the server!'));

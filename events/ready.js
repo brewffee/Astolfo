@@ -6,7 +6,7 @@ module.exports = (client) => {
         type: 'WATCHING',
     });
     client.guilds.cache.get('761203866732724225').channels.cache.get('787087630390919228').send(
-        new Discord.MessageEmbed().setTitle('Astolfo is online!').setDescription(`Listening on ${client.guilds.cache.size} guilds!`).setColor('GREEN').setFooter(config.version)
+        new Discord.MessageEmbed().setTitle('Astolfo is online!').setDescription(`Listening on ${client.guilds.cache.size} guilds!`).setColor('GREEN').setFooter(config.version),
     );
     setTimeout(() => { console.log(`${con.OK}${net.complete}`); }, 3300);
     setTimeout(() => { console.log(`${con.OK}${ev.ready[0]}${config.version}${ev.ready[1]}`); }, 5000);
