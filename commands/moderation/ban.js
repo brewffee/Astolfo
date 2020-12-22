@@ -2,15 +2,27 @@ module.exports.run = async (client, message, args) => {
     // Create the embeds
     const errorEmbed = new (require('discord.js').MessageEmbed)()
         .setColor('#f7b2d9')
-        .setTitle('Uh oh!'),
-        banEmbed = new (require('discord.js').MessageEmbed)()
-            .setColor('#f7b2d9')
-            .setTitle('Member successfully banned.')
-            .setDescription(`Banned ${toBan} from the server.\n\`\`\`Reason: ${banReason}\`\`\``)
-            .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
+        .setTitle('Uh oh!');
+    // Permission and context checks
+    if (!message.guild) {
+        errorEmbed.setDescription('You\'re trying to use a guild-only command in a DM!');
+        return message.channel.send(errorEmbed);
+    } else if (!message.guild.member(message.author).hasPermission('BAN_MEMBERS')) {
+        errorEmbed.setDescription('You do not have permission to ban members!');
+        return message.channel.send(errorEmbed);
+    } else if (!message.guild.me.hasPermission('BAN_MEMBERS')) {
+        errorEmbed.setDescription('I don\'t have permission to ban members!');
+        return message.channel.send(errorEmbed);
+    }
     // Define changing variables
     let memberID, isGlobal, toBan,
         banReason = args.join(' ').replace(args[0], '');
+    // Create the ban embed
+    const banEmbed = new (require('discord.js').MessageEmbed)()
+        .setColor('#f7b2d9')
+        .setTitle('Member successfully banned.')
+        .setDescription(`Banned ${toBan} from the server.\n\`\`\`Reason: ${banReason}\`\`\``)
+        .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
     // Check for a GuildMember/User
     if (!args[0]) {
         // Check if no arguments were given
@@ -39,18 +51,6 @@ module.exports.run = async (client, message, args) => {
     // Check for a banReason to associate the ban with
     if (banReason.length < 1) {
         banReason = 'No reason provided';
-    }
-
-    // Permission and context checks
-    if (!message.guild) {
-        errorEmbed.setDescription('You\'re trying to use a guild-only command in a DM!');
-        return message.channel.send(errorEmbed);
-    } else if (!message.guild.member(message.author).hasPermission('BAN_MEMBERS')) {
-        errorEmbed.setDescription('You do not have permission to ban members!');
-        return message.channel.send(errorEmbed);
-    } else if (!message.guild.me.hasPermission('BAN_MEMBERS')) {
-        errorEmbed.setDescription('I don\'t have permission to ban members!');
-        return message.channel.send(errorEmbed);
     }
 
     // Checks (if GuildMember is present)
