@@ -1,6 +1,6 @@
 {
   "name": "astolfo",
-  "version": "4.0.0-db139",
+  "version": "4.0.0-db142",
   "description": "A cool little bot that I work on in my free time.",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "@naval-base/ms": "^3.1.0",
     "child_process": "^1.0.2",
     "discord.js": "^12.5.1",
+    "eslint": "^7.16.0",
     "nekos.life": "^2.0.7",
     "node-fetch": "^2.6.1",
     "require-all": "^3.0.0"

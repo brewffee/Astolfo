@@ -1,7 +1,7 @@
 module.exports.run = async (client, message, args) => {
     const config = require('../../config/config.json'),
         changelog = require('../../logs/entries.json'),
-        latest = 'b138';
+        latest = 'b142';
     try {
         message.channel.send(
             new (require('discord.js').MessageEmbed)()

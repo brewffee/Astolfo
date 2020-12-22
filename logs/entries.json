@@ -1,5 +1,11 @@
 {	"entry":
 	{
+		"b142": 
+		{
+			"head":"(v4-b142) Several bug fixes + style changes",
+			"body":"- Commands now use Discord.Collection()\n- New template command for building future commands\n- Fixed ban command",
+			"date":"Changelog - December 22nd, 2020"
+		},
 		"b138": 
 		{
 			"head":"(v4-b138) Fetch without cache",
