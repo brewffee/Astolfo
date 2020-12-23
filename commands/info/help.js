@@ -1,3 +1,1 @@
-module.exports.run = async (client, message) => {
-    const c = await JSON.stringify(Array.from(client.cmds)); message.channel.send(c);
-};
+module.exports.run = async (m)=>await m.channel.send(Array.from(m.client.cmds).toString().replace(/\[object Object],|,\[object Object]$/g, ' '));
