@@ -6,6 +6,7 @@ const { Client, Collection, MessageEmbed } = require('discord.js'),
 	config = require('./config/config.json'),
 	locate = require('fs').readdir,
 	client = new Client();
+client.cmds = new Collection();
 
 // EVENTS =================================================
 locate('./events/', (err, events) => {
@@ -19,9 +20,9 @@ locate('./events/', (err, events) => {
 		if (clientEvent.startsWith(config.disablePrefix)) return;
 		try {
 			client.on(clientEvent, event.bind(null, client));
-			setTimeout(() => { console.log(`${con.OK}Loaded event ${clientEvent.toUpperCase()}!`); }, 1000);
+			console.log(`${con.OK}Loaded event ${clientEvent.toUpperCase()}!`);
 		} catch {
-			return setTimeout(() => { console.log(`${con.ERR}Failed to load event ${clientEvent.toUpperCase()}!`); }, 1000);
+			return console.log(`${con.ERR}Failed to load event ${clientEvent.toUpperCase()}!`);
 		}
 	});
 });
@@ -34,7 +35,6 @@ if (config.debug) {
 }
 
 // COMMANDS ===============================================
-client.cmds = new Collection();
 
 locate('./commands/', (err, groupDir) => {
 	if (err) {
@@ -52,9 +52,9 @@ locate('./commands/', (err, groupDir) => {
 				const command = file.split('.')[0];
 				try {
 					client.cmds.set(command, require(`./commands/${group}/${file}`));
-					setTimeout(() => { console.log(`${con.OK}Loaded command ${group.toUpperCase()}:${command.toUpperCase()}!`); }, 3000);
+					console.log(`${con.OK}Loaded command ${group.toUpperCase()}:${command.toUpperCase()}!`);
 				} catch {
-					return setTimeout(() => { console.log(`${con.ERR}failed to load command ${command.toUpperCase()}`); }, 3000);
+					return console.log(`${con.ERR}failed to load command ${command.toUpperCase()}`);
 				}
 			});
 		});
@@ -62,19 +62,17 @@ locate('./commands/', (err, groupDir) => {
 });
 
 // CONSOLE ===============================================
-setTimeout(() => { console.log(`${con.INFO}Finishing...`); }, 3500);
+console.log(`${con.INFO}Finishing...`);
 process.on('SIGINT', async () => {
 	console.log(`${con.LINE}${con.STOP}${ev.stopping}`);
 	client.guilds.cache.get('761203866732724225').channels.cache.get('787087630390919228').send(
 		new MessageEmbed().setTitle('Astolfo is shutting down...').setDescription('Preparing to disconnect').setColor('RED').setFooter(config.version),
 	);
-
 	setTimeout(async () => {
 		client.destroy();
 		console.log(`${con.OK}${net.disconnected}`);
 		process.exit(0);
-	}, 700);
-
+	}, 1000);
 }).on('exit', () => {
 	console.log(`${con.OK}${ev.stopped}`);
 });
