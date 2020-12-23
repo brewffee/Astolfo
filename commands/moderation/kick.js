@@ -1,10 +1,9 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (message, args) => {
     const config = require('../../config/config.json'),
         errorEmbed = new (require('discord.js').MessageEmbed)()
             .setColor('#f7b2d9')
             .setTitle('Uh oh!');
     let memberID;
-    console.log('let memberID;')
     if (!args[0]) {
         // Check if no arguments were given
         return message.channel.send(errorEmbed.setDescription('No member specified.\nUsage: `a!kick <member> [reason]`'));
@@ -18,24 +17,20 @@ module.exports.run = async (client, message, args) => {
         // Check if given argument does not match ID or mention format
         return message.channel.send(errorEmbed.setDescription('Invalid member specified.\nUsage: `a!kick <member> [reason]`'));
     }
-    console.log('passed checks')
-    console.log(memberID);
 
     // Find a GuildMember if all checks passed
     // const toKick = await message.guild.members.cache.find(gm => gm.user.id == memberID);
-    console.log('finding gm')
     let toKick;
     try {
-        toKick = await message.guild.members.fetch({ user: memberID, force: true, cache: false })
+        toKick = await message.guild.members.fetch({ user: memberID, force: true, cache: false });
     } catch (E) {
         if (E.message === 'Unknown Member') {
             return message.channel.send(
-                errorEmbed.setDescription('You can\'t kick someone who isn\'t in the server!')
+                errorEmbed.setDescription('You can\'t kick someone who isn\'t in the server!'),
             );
         }
     }
 
-    console.log('found')
     // Check for a kickReason to associate the ban with
     let kickReason = args.slice(1).join(' ');
     if (kickReason.length < 1) {

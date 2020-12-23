@@ -1,4 +1,4 @@
-module.exports.run = async (client, message) => {
+module.exports.run = async (message) => {
     const fetch = require('node-fetch'),
         auth = require('../../auth/auth.json');
     fetch(`https://api.tenor.com/v1/random?key=${auth.api.key.tenor}&locale=en_US&q=dog&limit=1`)

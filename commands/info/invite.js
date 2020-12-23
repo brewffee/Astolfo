@@ -1,4 +1,4 @@
-module.exports.run = async (client, message) => {
+module.exports.run = async (message) => {
     const config = require('../../config/config.json');
     message.channel.send(
         new (require('discord.js').MessageEmbed)()

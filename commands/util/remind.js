@@ -1,4 +1,4 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (message, args) => {
     const ms = require('ms'),
         time = ms(args[1]);
     // current time + time = expiry date

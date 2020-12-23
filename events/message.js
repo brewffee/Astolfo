@@ -16,5 +16,5 @@ module.exports = (client, message) => {
 		}
 	}
 
-	command.run(client, message, args);
+	command.run(message, args);
 };

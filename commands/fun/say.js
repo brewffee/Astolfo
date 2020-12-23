@@ -1,4 +1,4 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (message, args) => {
     if (!args[0]) {
         return message.channel.send(
             new (require('discord.js').MessageEmbed)()

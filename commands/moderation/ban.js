@@ -1,4 +1,4 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (message, args) => {
     // Create the embeds
     const errorEmbed = new (require('discord.js').MessageEmbed)()
         .setColor('#f7b2d9')

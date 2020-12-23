@@ -1,4 +1,4 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (message, args) => {
     const config = require('../../config/config.json'),
         changelog = require('../../logs/entries.json'),
         latest = 'b142';
