@@ -1,6 +1,6 @@
 {
   "name": "astolfo",
-  "version": "4.0.0-db142",
+  "version": "4.0.0-db151",
   "description": "A cool little bot that I work on in my free time.",
   "main": "index.js",
   "scripts": {

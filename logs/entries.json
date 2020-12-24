@@ -1,5 +1,11 @@
 {	"entry":
 	{
+		"b151": 
+		{
+			"head":"(v4-b151) Minor changes + faster WS connection",
+			"body":"- Added `bufferutil` and `utf-8-validate` to speed up client's WS connection\n- Client is no longer exported and must be accessed using `message.client`\n- 'Loads' faster (Removed `setTimeout`s to reflect the bot's *actual* loading time",
+			"date":"Changelog - December 22nd, 2020"
+		},
 		"b142": 
 		{
 			"head":"(v4-b142) Several bug fixes + style changes",
