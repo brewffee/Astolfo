@@ -2,7 +2,7 @@ module.exports.run = async (message, args) => {
     const config = require('../../config/config.json'),
         changelog = require('../../logs/entries.json'),
         latest = 'b151';
-        message.channel.send(`version ${config.version.substr(config.version.indexOf('-') + 1)}, args ${args[0]}, latest ${latest}`);
+        message.channel.send(`version ${config.version.substr(config.version.indexOf('b'))}, args ${args[0]}, latest ${latest}`);
     try {
         message.channel.send(
             new (require('discord.js').MessageEmbed)()
@@ -19,7 +19,7 @@ module.exports.run = async (message, args) => {
                     .setFooter(`Astolfo ${config.version}`),
             );
 
-        } else if (args[0] == config.version.substr(config.version.indexOf('-') + 1) && config.version != latest) {
+        } else if (args[0] == config.version.substr(config.version.indexOf('b')) && config.version != latest) {
             message.channel.send(
                 new (require('discord.js').MessageEmbed)()
                     .setTitle('Uh oh!')
