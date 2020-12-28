@@ -77,7 +77,7 @@ module.exports.run = async (message, args) => {
         const banEmbed = new (require('discord.js').MessageEmbed)()
             .setColor('#f7b2d9')
             .setTitle('Member successfully banned.')
-            .setDescription(`Banned ${toBan} from the server.\n\`\`\`Reason: ${banReason}\`\`\``)
+            .setDescription(`Banned ${toBan} from the server.\n\`\`\`Reason: ${banReason.replace(/`/g, '`\u200b')}\`\`\``)
             .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
 
         // Send the ban embed
@@ -100,8 +100,8 @@ module.exports.run = async (message, args) => {
         // Create the ban embed
         const banEmbed = new (require('discord.js').MessageEmbed)()
             .setColor('#f7b2d9')
-            .setTitle('Member successfully banned.')
-            .setDescription(`This user will no longer be able to join the server.\n\`\`\`Reason: ${banReason}\`\`\``)
+            .setTitle('User successfully banned.')
+            .setDescription(`This user will no longer be able to join the server.\n\`\`\`Reason: ${banReason.replace(/`/g, '`\u200b')}\`\`\``)
             .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
 
         // Send the embed
