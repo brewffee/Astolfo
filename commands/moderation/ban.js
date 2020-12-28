@@ -18,20 +18,18 @@ module.exports.run = async (message, args) => {
     let memberID, isGlobal, toBan;
 
     // Check for a banReason to associate the ban with
-    let banReason; args[1] ? banReason = args.join(' ').replace(args[0], '') : banReason = 'No reason provided';
+    let banReason; args[1] ? banReason = args.slice(1).join(' ').replace(/`/g, '`\u200b').trim() : banReason = 'No reason provided';
 
     // Check for a GuildMember/User
     if (!args[0]) {
         // Check if no arguments were given
         return message.channel.send(errorEmbed.setDescription('Invalid usage.\nUsage: `a!ban <member> [reason]`'));
-    } else if (/<@!?(\d)>/.test(args[0])) {
+    } else if (/(^<@?!)?(\d)(>$)/.test(args[0])) {
         // Check if given argument is a mention
         memberID = args[0].toString().replace(/\D/g, '');
-        message.channel.send(new (require('discord.js')).MessageEmbed().setDescription(memberID));
-    } else if (/[0-9]+$/.test(args[0])) {
+    } else if (/\d+$/.test(args[0])) {
         // Check if given argument is a user ID
         memberID = args[0].toString();
-        message.channel.send(new (require('discord.js')).MessageEmbed().setDescription(memberID));
     } else {
         // Check if given argument does not match ID or mention format
         return message.channel.send(errorEmbed.setDescription('Invalid user specified.\nUsage: `a!ban <member> [reason]`'));
@@ -68,7 +66,7 @@ module.exports.run = async (message, args) => {
     if (!isGlobal) {
         // Attempt to ban the GuildMember, send error if failed.
         try {
-            // message.guild.members.ban(memberID, { days: 7, reason: banReason });
+            message.guild.members.ban(memberID, { days: 7, reason: banReason });
         } catch (error) {
             console.error;
             message.channel.send(errorEmbed.setDescription('An unknown error occured whilst trying to run that command! Please try again in a few seconds.'));
@@ -77,7 +75,7 @@ module.exports.run = async (message, args) => {
         const banEmbed = new (require('discord.js').MessageEmbed)()
             .setColor('#f7b2d9')
             .setTitle('Member successfully banned.')
-            .setDescription(`Banned ${toBan} from the server.\n\`\`\`Reason: ${banReason.replace(/`/g, '`\u200b')}\`\`\``)
+            .setDescription(`Banned ${toBan} from the server.\n\`\`\`Reason: ${banReason}\`\`\``)
             .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
 
         // Send the ban embed
@@ -91,11 +89,10 @@ module.exports.run = async (message, args) => {
         }
         // Attempt to ban the user, send error if failed.
         try {
-            // message.guild.members.ban({ user: memberID, days: 7, reason: banReason });
+            message.guild.members.ban(memberID, { days: 7, reason: banReason });
         } catch (error) {
-            message.channel.send('Triggered isGlobal error'),
-                console.error,
-                message.channel.send(errorEmbed.setDescription('An unknown error occured whilst trying to run that command! Please try again in a few seconds.'));
+            console.error;
+            message.channel.send(errorEmbed.setDescription('An unknown error occured whilst trying to run that command! Please try again in a few seconds.'));
         }
         // Create the ban embed
         const banEmbed = new (require('discord.js').MessageEmbed)()
