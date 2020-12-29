@@ -3,7 +3,7 @@
 		"b163": 
 		{
 			"head":"(v4-b163) MORE ban fixes",
-			"body":"- You can safely use `\u200b`\u200b`\u200b within ban reasons\n- Banning global users is fixed",
+			"body":"- You can safely use \\`\u200b\\`\u200b\\`\u200b within ban reasons\n- Banning global users is fixed",
 			"date":"Changelog - December 27nd, 2020"
 		},
 		"b151": 
