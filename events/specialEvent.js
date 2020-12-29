@@ -1,3 +1,3 @@
 module.exports = (client, message) => {
-    message.channel.send('Done.');
+  message.channel.send("Done.");
 };
