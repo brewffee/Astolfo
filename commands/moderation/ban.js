@@ -42,6 +42,9 @@ module.exports.run = async (message, args) => {
         if (E.message === 'Unknown Member') {
             // Declare a global user if no guild member was found
             isGlobal = true; toBan = memberID;
+        } else if (E.message === 'Unknown User') {
+            // Stop if the user is invalid
+            return message.channel.send(errorEmbed.setDescription('Invalid user specified.\nUsage: `a!ban <member> [reason]`'));
         }
     }
 
@@ -83,7 +86,7 @@ module.exports.run = async (message, args) => {
     } else {
         // Check if the user is banned
         const bans = await message.guild.fetchBans();
-        if (JSON.stringify(bans).includes(toBan)) {
+        if (JSON.stringify(bans).includes(memberID)) {
             // Prevent banning of an already banned User
             return message.channel.send(errorEmbed.setDescription('That user is already banned!'));
         }
