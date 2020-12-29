@@ -6,16 +6,15 @@ module.exports.run = async (message, args, flags) => {
       )
     );
     return;
-  } else if (args[0].startsWith("--")) {
-    const flag = args[0].replace("--", "");
-    if (flag == "hi") {
+  } else {
+    if (flags.hi) {
       message.channel.send(
         new (require("discord.js").MessageEmbed)().setDescription(
           "Hello! I am a template command."
         )
       );
       return;
-    } else if (flag == "") {
+    } else {
       message.channel.send(
         new (require("discord.js").MessageEmbed)().setDescription(":thinking:")
       );
