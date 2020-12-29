@@ -1,10 +1,16 @@
 {	"entry":
 	{
+		"b168": 
+		{
+			"head":"(v4-b168) Even more ban fixes + updated moderation commands",
+			"body":"- Ban command has been fixed again :)\n- All moderation commands have been updated",
+			"date":"Changelog - December 28th, 2020"
+		},
 		"b163": 
 		{
 			"head":"(v4-b163) MORE ban fixes",
 			"body":"- You can safely use \\`\u200b\\`\u200b\\`\u200b within ban reasons\n- Banning global users is fixed",
-			"date":"Changelog - December 27nd, 2020"
+			"date":"Changelog - December 27th, 2020"
 		},
 		"b151": 
 		{
