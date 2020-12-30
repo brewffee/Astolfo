@@ -1,155 +1,130 @@
-{	"entry":
-	{
-		"b168": 
-		{
-			"head":"(v4-b168) Even more ban fixes + updated moderation commands",
-			"body":"- Ban command has been fixed again :)\n- All moderation commands have been updated",
-			"date":"Changelog - December 28th, 2020"
-		},
-		"b163": 
-		{
-			"head":"(v4-b163) MORE ban fixes",
-			"body":"- You can safely use \\`\u200b\\`\u200b\\`\u200b within ban reasons\n- Banning global users is fixed",
-			"date":"Changelog - December 27th, 2020"
-		},
-		"b151": 
-		{
-			"head":"(v4-b151) Minor changes + faster WS connection",
-			"body":"- Added `bufferutil` and `utf-8-validate` to speed up client's WS connection\n- Client is no longer exported and must be accessed using `message.client`\n- 'Loads' faster (Removed `setTimeout`s to reflect the bot's *actual* loading time",
-			"date":"Changelog - December 22nd, 2020"
-		},
-		"b142": 
-		{
-			"head":"(v4-b142) Several bug fixes + style changes",
-			"body":"- Commands now use Discord.Collection()\n- New template command for building future commands\n- Fixed ban command",
-			"date":"Changelog - December 22nd, 2020"
-		},
-		"b138": 
-		{
-			"head":"(v4-b138) Fetch without cache",
-			"body":"- Commands dealing with user/member data no longer rely on cache",
-			"date":"Changelog - December 17th, 2020"
-		},
-		"b136": 
-		{
-			"head":"(v4-b136) Fixed kick + ping",
-			"body":"- Added ping command\n- Bugs fixes relating to [this issue](https://github.com/geixco/Astolfo/issues/2) have been applied in the kick command",
-			"date":"Changelog - December 17th, 2020"
-		},
-		"b124": 
-		{
-			"head":"(v4-b124) Softban command",
-			"body":"- Added softban command\n- New bugs found with commands dealing with user data, see [this issue](https://github.com/geixco/Astolfo/issues/2)",
-			"date":"Changelog - December 11th, 2020"
-		},
-		"b121": 
-		{
-			"head":"(v4-b119) Unban command + bug fixes",
-			"body":"- Unban command added\n- Addressed some bugs with ban command not stopping at errors",
-			"date":"Changelog - December 10th, 2020"
-		},
-		"b119": 
-		{
-			"head":"(v4-b119) Ban rewrite",
-			"body":"- Global Discord users can now be banned\n- New checks for detecting if a member is banned\n- Fixed permission checks\n- Cleaned up ban code",
-			"date":"Changelog - December 10th, 2020"
-		},
-		"b103": 
-		{
-			"head":"(v4-b103) Better command handler",
-			"body":"- Groups can now be read from the command directory instead of being manually defined",
-			"date":"Changelog - December 9th, 2020"
-		},
-		"b098": 
-		{
-			"head":"(v4-b096) Debug mode",
-			"body":"- Debug mode now toggleable via configuration file",
-			"date":"Changelog - December 8th, 2020"
-		},
-		"b096": 
-		{
-			"head":"(v4-b096) General changes",
-			"body":"- Prefix no longer case-sensitive",
-			"date":"Changelog - December 8th, 2020"
-		},
-		"b094": 
-		{
-			"head":"(v4-b094) Clean changelogs + eval",
-			"body":"- Created a JSON file for logs\n- Added `eval` (only usable by bot owner & when testing)",
-			"date":"Changelog - December 6th, 2020"
-		},
-		"b083": 
-		{
-			"head":"(v4-b083) Uptime command",
-			"body":"- Added `v4uptime`",
-			"date":"Changelog - December 5th, 2020"
-		},
-		"b069": 
-		{
-			"head":"(v4-b069) Say command fixes",
-			"body":"- Added error handling",
-			"date":"Changelog - December 5th, 2020"
-		},
-		"b068": 
-		{
-			"head":"(v4-b068) Internal changes + bug fixes",
-			"body":"- All commands use `em()`\n- Avatar command fixed\n- Say should now work with mentions",
-			"date":"Changelog - December 5th, 2020"
-		},
-		"b064": 
-		{
-			"head":"(v4-b064) Commands imported from v3",
-			"body":"- Added `v3invite`, `v3say`",
-			"date":"Changelog - December 4th, 2020"
-		},
+{
+  "entry": {
+    "b168": {
+      "head": "(v4-b168) Even more ban fixes + updated moderation commands",
+      "body": "- Ban command has been fixed again :)\n- All moderation commands have been updated",
+      "date": "Changelog - December 28th, 2020"
+    },
+    "b163": {
+      "head": "(v4-b163) MORE ban fixes",
+      "body": "- You can safely use \\`\u200b\\`\u200b\\`\u200b within ban reasons\n- Banning global users is fixed",
+      "date": "Changelog - December 27th, 2020"
+    },
+    "b151": {
+      "head": "(v4-b151) Minor changes + faster WS connection",
+      "body": "- Added `bufferutil` and `utf-8-validate` to speed up client's WS connection\n- Client is no longer exported and must be accessed using `message.client`\n- 'Loads' faster (Removed `setTimeout`s to reflect the bot's *actual* loading time",
+      "date": "Changelog - December 22nd, 2020"
+    },
+    "b142": {
+      "head": "(v4-b142) Several bug fixes + style changes",
+      "body": "- Commands now use Discord.Collection()\n- New template command for building future commands\n- Fixed ban command",
+      "date": "Changelog - December 22nd, 2020"
+    },
+    "b138": {
+      "head": "(v4-b138) Fetch without cache",
+      "body": "- Commands dealing with user/member data no longer rely on cache",
+      "date": "Changelog - December 17th, 2020"
+    },
+    "b136": {
+      "head": "(v4-b136) Fixed kick + ping",
+      "body": "- Added ping command\n- Bugs fixes relating to [this issue](https://github.com/geixco/Astolfo/issues/2) have been applied in the kick command",
+      "date": "Changelog - December 17th, 2020"
+    },
+    "b124": {
+      "head": "(v4-b124) Softban command",
+      "body": "- Added softban command\n- New bugs found with commands dealing with user data, see [this issue](https://github.com/geixco/Astolfo/issues/2)",
+      "date": "Changelog - December 11th, 2020"
+    },
+    "b121": {
+      "head": "(v4-b119) Unban command + bug fixes",
+      "body": "- Unban command added\n- Addressed some bugs with ban command not stopping at errors",
+      "date": "Changelog - December 10th, 2020"
+    },
+    "b119": {
+      "head": "(v4-b119) Ban rewrite",
+      "body": "- Global Discord users can now be banned\n- New checks for detecting if a member is banned\n- Fixed permission checks\n- Cleaned up ban code",
+      "date": "Changelog - December 10th, 2020"
+    },
+    "b103": {
+      "head": "(v4-b103) Better command handler",
+      "body": "- Groups can now be read from the command directory instead of being manually defined",
+      "date": "Changelog - December 9th, 2020"
+    },
+    "b098": {
+      "head": "(v4-b096) Debug mode",
+      "body": "- Debug mode now toggleable via configuration file",
+      "date": "Changelog - December 8th, 2020"
+    },
+    "b096": {
+      "head": "(v4-b096) General changes",
+      "body": "- Prefix no longer case-sensitive",
+      "date": "Changelog - December 8th, 2020"
+    },
+    "b094": {
+      "head": "(v4-b094) Clean changelogs + eval",
+      "body": "- Created a JSON file for logs\n- Added `eval` (only usable by bot owner & when testing)",
+      "date": "Changelog - December 6th, 2020"
+    },
+    "b083": {
+      "head": "(v4-b083) Uptime command",
+      "body": "- Added `v4uptime`",
+      "date": "Changelog - December 5th, 2020"
+    },
+    "b069": {
+      "head": "(v4-b069) Say command fixes",
+      "body": "- Added error handling",
+      "date": "Changelog - December 5th, 2020"
+    },
+    "b068": {
+      "head": "(v4-b068) Internal changes + bug fixes",
+      "body": "- All commands use `em()`\n- Avatar command fixed\n- Say should now work with mentions",
+      "date": "Changelog - December 5th, 2020"
+    },
+    "b064": {
+      "head": "(v4-b064) Commands imported from v3",
+      "body": "- Added `v3invite`, `v3say`",
+      "date": "Changelog - December 4th, 2020"
+    },
 
-		"b062": 
-		{
-			"head":"(v4-b062) Lots of internal changes",
-			"body":"- Code no longer uses `var` :sunglasses:\n- Command and event handlers tweaked\n- Error handling should be better",
-			"date":"Changelog - December 4th, 2020"
-		},
-		"b048": 
-		{
-			"head":"(v4-b048) Internal changes",
-			"body":"- Cleaned up a bunch of code",
-			"date":"Changelog - December 3rd, 2020"
-		},
-		"b045": 
-		{
-			"head":"(v4-b045) Change GIF retrieval method",
-			"body":"- GIF commands now send files, not links",
-			"date":"Changelog - December 2nd, 2020"
-		},
-		"b037": 
-		{
-			"head":"(v4-b037) GIF commands to v4",
-			"body":"- Upgraded gif commands to match v4style",
-			"date":"Changelog - December 2nd, 2020"
-		},
-		"b035": 
-		{
-			"head":"(v4-b035) More GIFs",
-			"body":"- Implemented `v4gif` + `dog` and `v4cat`",
-			"date":"Changelog - December 2nd, 2020"
-		},
-		"b031": 
-		{
-			"head":"(v4-b031) Avatar command",
-			"body":"- Implemented ~~v3avatar~~ `v4avatar` complete\n- Fixed a few bugs with using no args",
-			"date":"Changelog - December 2nd, 2020"
-		},
-		"b025": 
-		{
-			"head":"(v4-b025) Patch",
-			"body":"- Fixed error with `upcoming` and `changelog` not sending",
-			"date":"Changelog - December 1st, 2020"
-		},
-		"b024": 
-		{
-			"head":"- Ban and kick commands finally polished;\n- `changelog` and `upcoming` added to track bot changes",
-			"body":"(v4-b024) v4 Ban/Kick commands + changelog",
-			"date":"Changelog - December 1st, 2020"
-		}
-	}
+    "b062": {
+      "head": "(v4-b062) Lots of internal changes",
+      "body": "- Code no longer uses `var` :sunglasses:\n- Command and event handlers tweaked\n- Error handling should be better",
+      "date": "Changelog - December 4th, 2020"
+    },
+    "b048": {
+      "head": "(v4-b048) Internal changes",
+      "body": "- Cleaned up a bunch of code",
+      "date": "Changelog - December 3rd, 2020"
+    },
+    "b045": {
+      "head": "(v4-b045) Change GIF retrieval method",
+      "body": "- GIF commands now send files, not links",
+      "date": "Changelog - December 2nd, 2020"
+    },
+    "b037": {
+      "head": "(v4-b037) GIF commands to v4",
+      "body": "- Upgraded gif commands to match v4style",
+      "date": "Changelog - December 2nd, 2020"
+    },
+    "b035": {
+      "head": "(v4-b035) More GIFs",
+      "body": "- Implemented `v4gif` + `dog` and `v4cat`",
+      "date": "Changelog - December 2nd, 2020"
+    },
+    "b031": {
+      "head": "(v4-b031) Avatar command",
+      "body": "- Implemented ~~v3avatar~~ `v4avatar` complete\n- Fixed a few bugs with using no args",
+      "date": "Changelog - December 2nd, 2020"
+    },
+    "b025": {
+      "head": "(v4-b025) Patch",
+      "body": "- Fixed error with `upcoming` and `changelog` not sending",
+      "date": "Changelog - December 1st, 2020"
+    },
+    "b024": {
+      "head": "- Ban and kick commands finally polished;\n- `changelog` and `upcoming` added to track bot changes",
+      "body": "(v4-b024) v4 Ban/Kick commands + changelog",
+      "date": "Changelog - December 1st, 2020"
+    }
+  }
 }

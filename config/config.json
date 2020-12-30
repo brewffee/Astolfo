@@ -1,6 +1,6 @@
 {
-    "version":"4.0.0-b168",
-    "prefix": "a!",
-    "disablePrefix": "-",
-    "debug": true
+  "version": "4.0.0-b168",
+  "prefix": "a!",
+  "disablePrefix": "-",
+  "debug": true
 }
