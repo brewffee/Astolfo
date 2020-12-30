@@ -6,17 +6,14 @@ module.exports = (client, message) => {
       .split(/ +/g)
       .filter((a) => !/^--(.*)/.test(a)),
     command = client.cmds.get(args.shift().toLowerCase()),
-    flags = {};
-  message.content
-    .toLowerCase()
-    .split(" ")
-    .forEach((flag) => {
-      const match = flag.match(/^--(.*)/);
-      if (match) {
-        flags[match[1].split("=")?.[0] || match[1]] =
-          match[1].split("=")?.[1] || true;
-      }
-    });
+    flags = message.content
+      .toLowerCase()
+      .split(/ +/g)
+      .reduce((flags, flag) => {
+        const match = /^--([^=]+)(?:=(.*))?/.exec(flag);
+        if (match) flags[match[1]] = match[2] ?? true;
+        return flags;
+      }, {});
   if (
     message.author.bot ||
     !message.content.indexOf(config.prefix.toLowerCase()) === 0 ||
