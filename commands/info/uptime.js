@@ -3,10 +3,6 @@ module.exports.run = async (message) => {
   message.channel.send(
     new (require("discord.js").MessageEmbed)()
       .setColor("#f7b2d9")
-      .setDescription(
-        `It has been **${ms(message.client.uptime, {
-          long: true,
-        })}** since the last restart`
-      )
+      .setDescription(`It has been **${ms(message.client.uptime, { long: true })}** since the last restart`),
   );
 };
