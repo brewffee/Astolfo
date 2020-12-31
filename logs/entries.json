@@ -1,5 +1,10 @@
 {
   "entry": {
+    "b181": {
+      "head": "(v4-b181) Remind command + flags!",
+      "body": "- Flags have been added and will be slowly making their way into commands (see pr #4)\n- New reminder command (No database is present, don't expect reliability yet)",
+      "date": "Changelog - December 30th, 2020"
+    },
     "b168": {
       "head": "(v4-b168) Even more ban fixes + updated moderation commands",
       "body": "- Ban command has been fixed again :)\n- All moderation commands have been updated",
@@ -85,7 +90,6 @@
       "body": "- Added `v3invite`, `v3say`",
       "date": "Changelog - December 4th, 2020"
     },
-
     "b062": {
       "head": "(v4-b062) Lots of internal changes",
       "body": "- Code no longer uses `var` :sunglasses:\n- Command and event handlers tweaked\n- Error handling should be better",
