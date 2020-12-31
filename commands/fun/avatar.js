@@ -1,7 +1,7 @@
 module.exports.run = async (message, args) => {
-  const errorEmbed = new (require("discord.js").MessageEmbed)()
-    .setColor("#f7b2d9")
-    .setTitle("Uh oh!");
+  const errorEmbed = new (require('discord.js').MessageEmbed)()
+    .setColor('#f7b2d9')
+    .setTitle('Uh oh!');
   let memberID;
   if (!args[0]) {
     // Check if no arguments were given
@@ -9,11 +9,11 @@ module.exports.run = async (message, args) => {
   } else if (args[1]) {
     // Check if too many arguments were given
     return message.channel.send(
-      errorEmbed.setDescription("Invalid usage.\nUsage: `a!avatar [member]`")
+      errorEmbed.setDescription('Invalid usage.\nUsage: `a!avatar [member]`'),
     );
   } else if (/(^<@?!)?(\d)(>$)/.test(args[0])) {
     // Check if given argument is a mention
-    memberID = args[0].toString().replace(/[^0-9]/g, "");
+    memberID = args[0].toString().replace(/[^0-9]/g, '');
   } else if (/\d+$/.test(args[0])) {
     // Check if given argument is a user ID
     memberID = args[0].toString();
@@ -21,8 +21,8 @@ module.exports.run = async (message, args) => {
     // Check if given argument does not match ID or mention format
     return message.channel.send(
       errorEmbed.setDescription(
-        "Invalid member.\nUsage: `a!avatar [member]`"
-      )
+        'Invalid member.\nUsage: `a!avatar [member]`',
+      ),
     );
   }
 
@@ -31,20 +31,20 @@ module.exports.run = async (message, args) => {
   try {
     foundMember = await message.guild.members.fetch({ user: memberID, force: true, cache: false });
   } catch (E) {
-    if (E.message === "Unknown Member") {
+    if (E.message === 'Unknown Member') {
       return message.channel.send(
         errorEmbed.setDescription(
-          "I can't get the avatar of a someone who isn't in the server!"
-        )
+          'I can\'t get the avatar of a someone who isn\'t in the server!',
+        ),
       );
     }
   }
 
   // Retrieve and send the avatar
   message.channel.send(
-    new (require("discord.js").MessageEmbed)()
-      .setColor("#f7b2d9")
+    new (require('discord.js').MessageEmbed)()
+      .setColor('#f7b2d9')
       .setImage(`${foundMember.user.displayAvatarURL({ size: 4096, dynamic: true })}`)
-      .setTitle(`Avatar of ${foundMember.user.username}`)
+      .setTitle(`Avatar of ${foundMember.user.username}`),
   );
 };
