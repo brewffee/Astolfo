@@ -8,7 +8,7 @@ module.exports = (client, message) => {
         if (match) flags[match[1]] = match[2] ?? true;
         return flags;
       }, {});
-  if (message.author.bot || !message.content.indexOf(config.prefix.toLowerCase()) === 0 || !command) return;
+  if (message.author.bot || !message.content.startsWith(config.prefix.toLowerCase()) || !command) return;
 
   if (config.debug) {
     const { con } = require('../config/language.json');
