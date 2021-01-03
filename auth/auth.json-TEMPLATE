@@ -1,0 +1,13 @@
+{
+    "discord": 
+    {   
+        "token":"your-token-here"
+    },
+    "api":
+    {
+        "key":
+        {
+            "tenor":"tenor-api-key-here"
+        }
+    }
+}
