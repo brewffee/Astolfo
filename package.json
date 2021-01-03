@@ -13,6 +13,7 @@
     "bufferutil": "^4.0.2",
     "child_process": "^1.0.2",
     "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
     "eslint": "^7.16.0",
     "nekos.life": "^2.0.7",
     "node-fetch": "^2.6.1",

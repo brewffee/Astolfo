@@ -7,7 +7,7 @@ module.exports.run = async (message, args) => {
         .setDescription('Invalid usage.\nUsage: `a!gif <query>`'),
     );
   }
-  require('node-fetch')(`https://api.tenor.com/v1/random?key=${require('../../auth/auth.json').api.key.tenor}&locale=en_US&q=${args.join('%20')}&limit=1`)
+  require('node-fetch')(`https://api.tenor.com/v1/random?key=${process.env.API_TENOR}&locale=en_US&q=${args.join('%20')}&limit=1`)
     .then((r) => r.json())
     .then((q) =>
       message.channel.send(

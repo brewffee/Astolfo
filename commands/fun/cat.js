@@ -1,5 +1,5 @@
 module.exports.run = async (message) => {
-    require('node-fetch')(`https://api.tenor.com/v1/random?key=${require('../../auth/auth.json').api.key.tenor}&locale=en_US&q=cat&limit=1`)
+    require('node-fetch')(`https://api.tenor.com/v1/random?key=${process.env.API_TENOR}&locale=en_US&q=cat&limit=1`)
         .then((r) => r.json())
         .then((q) =>
             message.channel.send(

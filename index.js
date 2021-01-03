@@ -1,12 +1,12 @@
 'use strict';
 
 const { Client, Collection, MessageEmbed } = require('discord.js'),
-  auth = require('./auth/auth.json'),
   { con, ev, net } = require('./config/language.json'),
   config = require('./config/config.json'),
   locate = require('fs').readdir,
   client = new Client();
 client.cmds = new Collection();
+require('dotenv').config();
 
 // EVENTS =================================================
 locate('./events/', (err, events) => {
@@ -83,4 +83,4 @@ process.on('SIGINT', async () => {
   console.log(`${con.OK}${ev.stopped}`);
 });
 
-client.login(auth.discord.token);
+client.login(process.env.TOKEN);
