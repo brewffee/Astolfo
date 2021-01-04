@@ -13,15 +13,15 @@ module.exports.run = async (message, args, flags) => {
     } else if (!message.guild.me.permissions.has('MANAGE_MESSAGES')) {
         return message.channel.send(errorEmbed.setDescription('I don\'t have permission to manage messages!'));
     } else if (!args[0] || isNaN(args[0]) || args[1]) {
-        return message.channel.send(errorEmbed.setDescription('Invalid usage.\nUsage: `a!purge <amount> [--hidden]`'));
+        return message.channel.send(errorEmbed.setDescription('Invalid usage.\nUsage: `a!purge <amount> [--silent|--anon]`'));
     } else if (parseInt(args[0]) >= 100 || parseInt(args[0]) <= 1) {
-        return message.channel.send(errorEmbed.setDescription('Amount must be more than `1` and less than `100`\nUsage: `a!purge <amount> [--hidden|--anon]`'));
+        return message.channel.send(errorEmbed.setDescription('Amount must be more than `1` and less than `100`\nUsage: `a!purge <amount> [--silent|--anon]`'));
     }
     try {
         message.delete();
         message.channel.bulkDelete(parseInt(args[0]));
         flags.anon ? null : finishEmbed.setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
-        flags.hidden ? null : message.channel.send(finishEmbed);
+        flags.silent ? null : message.channel.send(finishEmbed);
     } catch (e) {
         console.log(e);
         message.channel.send(errorEmbed.setDescription('An unknown error occured whilst trying to run that command! Please try again in a few seconds.'));
