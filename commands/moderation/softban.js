@@ -5,13 +5,9 @@ module.exports.run = async (message, args) => {
     .setTitle('Uh oh!');
   // Permission and context checks
   if (!message.guild && message.channel.type === 'dm') {
-    errorEmbed.setDescription(
-      'You\'re trying to use a guild-only command in a DM!',
-    );
+    errorEmbed.setDescription('You\'re trying to use a guild-only command in a DM!');
     return message.channel.send(errorEmbed);
-  } else if (
-    !message.guild.member(message.author).permissions.has('BAN_MEMBERS')
-  ) {
+  } else if (!message.guild.member(message.author).permissions.has('BAN_MEMBERS')) {
     errorEmbed.setDescription('You do not have permission to ban members!');
     return message.channel.send(errorEmbed);
   } else if (!message.guild.me.permissions.has('BAN_MEMBERS')) {
@@ -23,17 +19,13 @@ module.exports.run = async (message, args) => {
 
   // Check for a banReason to associate the ban with
   let banReason;
-  args[1]
-    ? (banReason = args.slice(1).join(' ').replace(/`/g, '`\u200b').trim())
-    : (banReason = 'No reason provided');
+  args[1] ? (banReason = args.slice(1).join(' ').replace(/`/g, '`\u200b').trim()) : (banReason = 'No reason provided');
 
   // Check for a GuildMember/User
   if (!args[0]) {
     // Check if no arguments were given
     return message.channel.send(
-      errorEmbed.setDescription(
-        'Invalid usage.\nUsage: `a!softban <member> [reason]`',
-      ),
+      errorEmbed.setDescription('Invalid usage.\nUsage: `a!softban <member> [reason]`'),
     );
   } else if (/(^<@?!)?(\d)(>$)/.test(args[0])) {
     // Check if given argument is a mention
@@ -44,19 +36,13 @@ module.exports.run = async (message, args) => {
   } else {
     // Check if given argument does not match ID or mention format
     return message.channel.send(
-      errorEmbed.setDescription(
-        'Invalid user specified.\nUsage: `a!softban <member> [reason]`',
-      ),
+      errorEmbed.setDescription('Invalid user specified.\nUsage: `a!softban <member> [reason]`'),
     );
   }
 
   // Find a GuildMember if all checks passed
   try {
-    toBan = await message.guild.members.fetch({
-      user: memberID,
-      force: true,
-      cache: false,
-    });
+    toBan = await message.guild.members.fetch({ user: memberID, force: true, cache: false });
   } catch (E) {
     if (E.message === 'Unknown Member') {
       // Declare a global user if no guild member was found
@@ -65,9 +51,7 @@ module.exports.run = async (message, args) => {
     } else if (E.message === 'Unknown User') {
       // Stop if the user is invalid
       return message.channel.send(
-        errorEmbed.setDescription(
-          'Invalid user specified.\nUsage: `a!softban <member> [reason]`',
-        ),
+        errorEmbed.setDescription('Invalid user specified.\nUsage: `a!softban <member> [reason]`'),
       );
     }
   }
@@ -101,18 +85,14 @@ module.exports.run = async (message, args) => {
     } catch (error) {
       console.error;
       message.channel.send(
-        errorEmbed.setDescription(
-          'An unknown error occured whilst trying to run that command! Please try again in a few seconds.',
-        ),
+        errorEmbed.setDescription('An unknown error occured whilst trying to run that command! Please try again in a few seconds.'),
       );
     }
     // Create the ban embed
     const banEmbed = new (require('discord.js').MessageEmbed)()
       .setColor('#f7b2d9')
       .setTitle('Member successfully softbanned.')
-      .setDescription(
-        `Softbanned ${toBan} from the server.\n\`\`\`Reason: ${banReason}\`\`\``,
-      )
+      .setDescription(`Softbanned ${toBan} from the server.\n\`\`\`Reason: ${banReason}\`\`\``)
       .setFooter(
         `Moderator: ${message.author.tag}`,
         message.author.displayAvatarURL(),
@@ -126,9 +106,7 @@ module.exports.run = async (message, args) => {
     if (JSON.stringify(bans).includes(memberID)) {
       // Prevent banning of an already banned User
       return message.channel.send(
-        errorEmbed.setDescription(
-          'That user is already banned and cannot be softbanned!',
-        ),
+        errorEmbed.setDescription('That user is already banned and cannot be softbanned!'),
       );
     }
     // Attempt to ban the user, send error if failed.
@@ -139,22 +117,15 @@ module.exports.run = async (message, args) => {
     } catch (error) {
       console.error;
       message.channel.send(
-        errorEmbed.setDescription(
-          'An unknown error occured whilst trying to run that command! Please try again in a few seconds.',
-        ),
+        errorEmbed.setDescription('An unknown error occured whilst trying to run that command! Please try again in a few seconds.'),
       );
     }
     // Create the ban embed
     const banEmbed = new (require('discord.js').MessageEmbed)()
       .setColor('#f7b2d9')
       .setTitle('User successfully banned.')
-      .setDescription(
-        `This user will no longer be able to join the server.\n\`\`\`Reason: ${banReason}\`\`\``,
-      )
-      .setFooter(
-        `Moderator: ${message.author.tag}`,
-        message.author.displayAvatarURL(),
-      );
+      .setDescription(`This user will no longer be able to join the server.\n\`\`\`Reason: ${banReason}\`\`\``)
+      .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
 
     // Send the embed
     return message.channel.send(banEmbed);

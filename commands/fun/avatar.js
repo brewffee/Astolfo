@@ -20,9 +20,7 @@ module.exports.run = async (message, args) => {
   } else {
     // Check if given argument does not match ID or mention format
     return message.channel.send(
-      errorEmbed.setDescription(
-        'Invalid member.\nUsage: `a!avatar [member]`',
-      ),
+      errorEmbed.setDescription('Invalid member.\nUsage: `a!avatar [member]`'),
     );
   }
 
