@@ -49,9 +49,6 @@ module.exports = {
         } else if (!this.errorResponses[type]) {
             throw new Error(`Could not find error of type '${type ? type?.toString() : 'undefined'}'.`);
         }
-
         return destination.send(this.embedBase.setDescription(this.errorResponses[type]));
-
     },
 };
-
