@@ -4,6 +4,7 @@ module.exports = {
         'Unknown': 'An unknown error occured whilst trying to run that command! Please try again in a few seconds.',
         'Generic': 'An error occured whilst running this command!',
         'GuildOnly': 'You\'re trying to use a guild-only command in a DM!',
+        'NSFWOnly': 'You\'re trying to run an NSFW command in a safe channel!',
         'AvatarUsage': 'Invalid usage.\nUsage: `a!avatar [member]`',
         'AvatarMember': 'I can\'t get the avatar of a someone who isn\'t in the server!',
         'CatNotFound': 'Unable to find a kitty!',
