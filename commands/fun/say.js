@@ -13,10 +13,11 @@ module.exports.run = async (message, args) => {
     return message.channel.send(
         new (require('discord.js').MessageEmbed)()
             .setColor('#f7b2d9')
-            .setDescription(`"${args.join(' ').replace(/`/g, '`\u200b')}"`)
+            .setDescription(args.join(' '))
+            .setTimestamp()
             .setFooter(
-                `${message.author.username}`,
-                `${message.author.displayAvatarURL()}`,
+                `${message.author.tag}`,
+                `${message.author.displayAvatarURL({ dynamic: true })}`,
             ),
     );
 };
