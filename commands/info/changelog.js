@@ -1,7 +1,7 @@
 module.exports.run = async (message, args, flags) => {
   const config = require('../../config/config.json'),
     changelog = require('../../logs/entries.json'),
-    latest = 'b181';
+    latest = 'b202';
 
   args[1] || Object.keys(flags).length > 1
     ? message.channel.send(

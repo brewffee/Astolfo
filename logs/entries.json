@@ -1,5 +1,10 @@
 {
   "entry": {
+    "b212": {
+      "head": "(v4-b212) New utilities and commands",
+      "body": "- Added `hentai` and `neko` commands\n- Changed `say`s appearance\n- Console output is now colored",
+      "date": "Changelog - December 30th, 2020"
+    },
     "b181": {
       "head": "(v4-b181) Remind command + flags!",
       "body": "- Flags have been added and will be slowly making their way into commands (see pr #4)\n- New reminder command (No database is present, don't expect reliability yet)",
