@@ -4,11 +4,11 @@ module.exports.run = async (message) => {
         .then((b) => {
             message.channel.send(
                 new (require('discord.js')).MessageEmbed()
-                .setTitle('Nekos!')
-                .setColor(16233177)
-                .setURL(b.image)
-                .setImage(b.image)
-                .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true })),
+                    .setTitle('Nekos!')
+                    .setColor(16233177)
+                    .setURL(b.image)
+                    .setImage(b.image)
+                    .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true })),
             );
         });
 };
