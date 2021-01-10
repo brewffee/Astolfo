@@ -18,7 +18,7 @@ module.exports = (client, message) => {
       console.log(`${con.R}Request: "${cmd}"`);
     } else {
       cmd = message.content.substr(0, message.content.indexOf(' '));
-      console.log(`${con.R}Request: "${cmd}", "${args.join(' ')}"`);
+      console.log(`\x1b[36;10m${con.R}\x1b[0mRequest: \x1b[32;10m"${cmd}"\x1b[0m, \x1b[32;10m"${args.join(' ').replace(/\n/g, '\x1b[36;10m\\n\x1b[32;10m')}"\x1b[0m`);
     }
   }
 

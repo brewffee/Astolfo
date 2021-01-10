@@ -17,9 +17,9 @@ locate('./events/', (err, events) => {
       if (clientEvent.startsWith(config.disablePrefix)) return;
       try {
         client.on(clientEvent, event.bind(null, client));
-        console.log(`${con.OK}Loaded event ${clientEvent.toUpperCase()}!`);
+        console.log(`\x1b[32;10m${con.OK}\x1b[0mLoaded event \x1b[33;10m${clientEvent.toUpperCase()}\x1b[0m!`);
       } catch {
-        return console.log(`${con.ERR}Failed to load event ${clientEvent.toUpperCase()}!`);
+        return console.log(`\x1b[31;10m${con.ERR}\x1b[0mFailed to load event \x1b[33;10m${clientEvent.toUpperCase()}\x1b[0m!`);
       }
     });
   } catch {
@@ -46,9 +46,9 @@ locate('./commands/', (err, groupDir) => {
             const command = file.split('.')[0];
             try {
               client.cmds.set(command, require(`./commands/${group}/${file}`));
-              console.log(`${con.OK}Loaded command ${group.toUpperCase()}:${command.toUpperCase()}!`);
+              console.log(`\x1b[32;10m${con.OK}\x1b[0mLoaded command \x1b[33;10m${group.toUpperCase()}:${command.toUpperCase()}\x1b[0m!`);
             } catch {
-              return console.log(`${con.ERR}failed to load command ${command.toUpperCase()}`);
+              return console.log(`\x1b[31;10m${con.ERR}\x1b[0mFailed to load command \x1b[33;10m${command.toUpperCase()}\x1b[0m!`);
             }
           });
         } catch {

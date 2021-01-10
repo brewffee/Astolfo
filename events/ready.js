@@ -12,7 +12,7 @@ module.exports = (client) => {
         .setColor('GREEN')
         .setFooter(config.version),
     );
-  console.log(`${con.OK}${net.complete}`);
-  console.log(`${con.OK}${ev.ready[0]}${config.version}${ev.ready[1]}`);
-  console.log(`${con.OK}${ev.listening[0]}${client.guilds.cache.size}${ev.listening[1]}${con.LINE}`);
+  console.log(`\x1b[32;10m${con.OK}\x1b[0m${net.complete}`);
+  console.log(`\x1b[32;10m${con.OK}\x1b[0m${ev.ready[0]}${config.version}${ev.ready[1]}`);
+  console.log(`\x1b[32;10m${con.OK}\x1b[0m${ev.listening[0]}\x1b[33;10m${client.guilds.cache.size}\x1b[0m${ev.listening[1]}${con.LINE}`);
 };
