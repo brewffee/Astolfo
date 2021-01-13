@@ -12,12 +12,13 @@ module.exports.run = async (message, args) => {
   // Find a GuildMember if all checks passed
   let foundMember;
   try {
-    foundMember = await message.guild.members.fetch({ user: member.id, force: true, cache: false });
+    foundMember = await message.guild.members.fetch({ user: member, force: true, cache: false });
   } catch (E) {
     if (E.message === 'Unknown Member') {
       return err.throw('AvatarMember', message.channel);
     }
   }
+  console.log(member);
 
   // Retrieve and send the avatar
   message.channel.send(
