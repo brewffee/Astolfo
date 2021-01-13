@@ -5,7 +5,7 @@ module.exports.run = async (message) => {
             if (message.channel.nsfw) {
                 return message.channel.send(
                     new (require('discord.js')).MessageEmbed()
-                        .setTitle('Hentai! <:lewd:797720178691276811>')
+                        .setTitle('Hentai!')
                         .setColor(16233177)
                         .setURL(b.image)
                         .setImage(b.image)
