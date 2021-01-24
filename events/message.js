@@ -2,7 +2,7 @@
 module.exports = (client, message) => {
   const config = require('../config/config.json'),
     args = message.content.slice(config.prefix.length).trim().split(/ +/g).filter((a) => !/^--(.*)/.test(a)),
-    command = client.cmds.get(args.shift().toLowerCase()),
+    command = client.commands.get(args.shift().toLowerCase()),
     flags = message.content.toLowerCase().split(/ +/g).reduce((flags, flag) => {
         const match = /^--([^=]+)(?:=(.*))?/.exec(flag);
         if (match) flags[match[1]] = match[2] ?? true;
