@@ -2,7 +2,6 @@ module.exports.run = async (message, args, flags) => {
   const config = require('../../config/config.json'),
     changelog = require('../../logs/entries.json'),
     latest = 'b202';
-
   args[1] || Object.keys(flags).length > 1
     ? message.channel.send(
       new (require('discord.js').MessageEmbed)()
@@ -106,11 +105,18 @@ module.exports.run = async (message, args, flags) => {
                     )
                 )
             )
-            : message.channel.send(
+            : changelog.entry[latest]
+            ? (message.channel.send(
               new (require('discord.js')).MessageEmbed()
                 .setTitle(changelog.entry[latest].date)
                 .addField(changelog.entry[latest].head, changelog.entry[latest].body)
                 .setFooter(`Astolfo ${config.version}`),
+            )
+            )
+            : message.channel.send(
+              new (require('discord.js').MessageEmbed)()
+                .setTitle('Uh oh!')
+                .setDescription('The current version does not have a changelog entry associated with it.'),
             )
         )
     );
