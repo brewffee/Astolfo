@@ -1,84 +1,28 @@
 'use strict';
 
-const { Client, Collection, MessageEmbed } = require('discord.js'),
-  { con, ev, net } = require('./config/language.json'),
+const { Client, Collection } = require('discord.js'),
+  { con, ev } = require('./config/language.json'),
   config = require('./config/config.json'),
-  locate = require('fs').readdir,
   client = new Client();
-client.cmds = new Collection();
+client.commands = new Collection();
 require('dotenv').config();
 
 // EVENTS =================================================
-locate('./events/', (err, events) => {
-  try {
-    events.forEach((eventFile) => {
-      const event = require(`./events/${eventFile}`),
-        clientEvent = eventFile.split('.')[0];
-      if (clientEvent.startsWith(config.disablePrefix)) return;
-      try {
-        client.on(clientEvent, event.bind(null, client));
-        console.log(`\x1b[32;10m${con.OK}\x1b[0mLoaded event \x1b[33;10m${clientEvent.toUpperCase()}\x1b[0m!`);
-      } catch {
-        return console.log(`\x1b[31;10m${con.ERR}\x1b[0mFailed to load event \x1b[33;10m${clientEvent.toUpperCase()}\x1b[0m!`);
-      }
-    });
-  } catch {
-    console.log(err);
-    return process.exit();
-  }
-});
+require('./handlers/Event').load(client);
 
 // DEBUG ==================================================
 if (config.debug) {
-  // Creating event files for debug mode is less convenient
   client.on('debug', console.log).on('warn', console.log);
 }
 
 // COMMANDS ===============================================
-
-locate('./commands/', (err, groupDir) => {
-  try {
-    groupDir.forEach((group) => {
-      locate(`./commands/${group}`, (err, commands) => {
-        try {
-          commands.forEach((file) => {
-            if (!file.endsWith('.js') || file.startsWith(config.disablePrefix)) return;
-            const command = file.split('.')[0];
-            try {
-              client.cmds.set(command, require(`./commands/${group}/${file}`));
-              console.log(`\x1b[32;10m${con.OK}\x1b[0mLoaded command \x1b[33;10m${group.toUpperCase()}:${command.toUpperCase()}\x1b[0m!`);
-            } catch {
-              return console.log(`\x1b[31;10m${con.ERR}\x1b[0mFailed to load command \x1b[33;10m${command.toUpperCase()}\x1b[0m!`);
-            }
-          });
-        } catch {
-          console.log(err);
-          return process.exit();
-        }
-      });
-    });
-  } catch {
-    console.log(err);
-    return process.exit();
-  }
-});
+require('./handlers/Command').load(client);
 
 // CONSOLE ===============================================
 console.log(`${con.INFO}Finishing...`);
 process.on('SIGINT', async () => {
-  console.log(`${con.LINE}${con.STOP}${ev.stopping}`);
-  client.guilds.cache.get('761203866732724225').channels.cache.get('787087630390919228').send(
-    new MessageEmbed()
-      .setTitle('Astolfo is shutting down...')
-      .setDescription('Preparing to disconnect')
-      .setColor('RED')
-      .setFooter(config.version),
-  );
-  setTimeout(async () => {
-    client.destroy();
-    console.log(`${con.OK}${net.disconnected}`);
-    process.exit(0);
-  }, 1000);
+  client.emit('shutdown');
+
 }).on('exit', () => {
   console.log(`${con.OK}${ev.stopped}`);
 });
