@@ -1,35 +1,33 @@
 module.exports.run = async (message, args, flags) => {
-  if (message.author.id !== '548675133481418752') {
-    return message.channel.send(
-      new (require('discord.js')).MessageEmbed()
-        .setTitle('hmm')
-        .setDescription('no'),
-    );
-  }
+  const Discord = require('discord.js');
   try {
+    if (message.author.id !== '548675133481418752') return;
     const start = process.hrtime();
-    let res = flags.sync ? eval(args.join(' ')) : await eval(`( async () => { return ${args.join(' ')}; })()`);
-    typeof (res) !== 'string' ? res = require('util').inspect(res, { depth: 0 }) : res = `'${res}'`;
-    if (res.toString().length > 1950) {
-      const bin = await (require('sourcebin')).create([{ name: 'eval', content: res.toString().replace(message.client.token, 'no'), languageID: 'javascript' }]);
-      return message.channel.send(
-        new (require('discord.js')).MessageEmbed()
+    const res = require('util').inspect(
+      (flags.return)
+        ? await eval(`(async()=>{ ${args.join(' ')}; return ${flags.return}; })();`)
+        : await eval(`(async()=>{ return ${args.join(' ')}; })();`),
+      { depth: 0 }).toString().replace(message.client.token, '').replace(/`/g, '`\u200b');
+    const time = parseFloat((process.hrtime(start)[1] / 1000000).toFixed(2));
+    const bin = (await (require('sourcebin')).create([{ name: 'eval', content: res, languageID: 'javascript' }])).url;
+
+    (res.toString().length >= 2000)
+      ? message.channel.send(
+        new Discord.MessageEmbed()
           .setTitle('Eval output is too large!')
-          .setDescription(`Evaled contents exceeded the maximum of 2000 characters.\nClick [this link](${bin.url}) to see the full output.`),
-      );
-    } else {
-      message.channel.send(
-        new (require('discord.js')).MessageEmbed()
+          .setDescription(`Evaled contents exceeded the maximum of 2000 characters.\nClick [this link](${bin}) to see the full output.`),
+      )
+      : message.channel.send(
+        new Discord.MessageEmbed()
           .setTitle('Eval success!')
-          .setDescription(`\`\`\`js\n${res.toString().replace(/`/g, '`\u200b').replace(message.client.token, 'no')}\`\`\``)
-          .setFooter(`Took ${parseFloat((process.hrtime(start)[1] / 1000000).toFixed(2))}ms`),
+          .setDescription(`\`\`\`js\n${res}\`\`\``)
+          .setFooter(`Took ${time}ms`),
       );
-    }
-  } catch (err) {
+  } catch (error) {
     message.channel.send(
-      new (require('discord.js')).MessageEmbed()
+      new Discord.MessageEmbed()
         .setTitle('Eval failed!')
-        .setDescription(`\`\`\`js\n${err.toString().replace(/`/g, '`\u200b')}\`\`\``),
+        .setDescription(`\`\`\`js\n${error.toString().replace(/`/g, '`\u200b')}\`\`\``),
     );
   }
 };
