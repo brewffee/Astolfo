@@ -1,31 +1,16 @@
 module.exports.run = async (message) => {
-    require('node-fetch')(`https://api.tenor.com/v1/random?key=${process.env.API_TENOR}&locale=en_US&q=cat&limit=1`)
-        .then((r) => r.json())
-        .then((q) =>
-            message.channel.send(
-                new (require('discord.js').MessageEmbed)()
-                    .setColor('#f7b2d9')
-                    .setTitle('Meow :cat2:')
-                    .setImage(q.results[0].media[0].gif.url)
-                    .setFooter(`Requested by ${message.author.username}`),
-            ),
-        )
-        .catch((e) => {
-            console.log(e);
-            if (e.toString().startsWith('TypeError: Cannot read property \'media\' of undefined')) {
-                return message.channel.send(
-                    new (require('discord.js').MessageEmbed)()
-                        .setColor('#f7b2d9')
-                        .setTitle('Uh oh!')
-                        .setDescription('Unable to find a kitty!'),
-                );
-            } else {
-                return message.channel.send(
-                    new (require('discord.js').MessageEmbed)()
-                        .setColor('#f7b2d9')
-                        .setTitle('Uh oh!')
-                        .setDescription('An error occured whilst running this command!'),
-                );
-            }
-        });
+    const Errors = require('../../util/Errors.js');
+    const Discord = require('discord.js');
+    try {
+        const { gif } = (await (await require('node-fetch')(`https://api.tenor.com/v1/random?key=${process.env.API_TENOR}&locale=en_US&q=cat&limit=1`)).json()).results[0].media[0];
+        message.channel.send(
+            new Discord.MessageEmbed()
+                .setColor('#f7b2d9')
+                .setTitle('Meow :cat2:')
+                .setImage(gif.url)
+                .setFooter(`Requested by ${message.author.username}`),
+        );
+    } catch (error) {
+        Errors.throw('CatNotFound', message.channel);
+    }
 };
