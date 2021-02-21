@@ -7,7 +7,7 @@ module.exports.run = async (message, args) => {
                 .setDescription('Invalid arguments given.\nUsage: `a!say <text>`'),
         );
     }
-    if (message.guild.me.hasPermission('MANAGE_MESSAGES')) {
+    if (message.guild?.me.hasPermission('MANAGE_MESSAGES')) {
         message.delete();
     }
     return message.channel.send(
