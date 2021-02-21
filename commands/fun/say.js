@@ -1,20 +1,17 @@
 module.exports.run = async (message, args) => {
-    if (!args[0]) {
+    const Errors = require('../../util/Errors.js');
+    const Discord = require('discord.js');
+    try {
+        if (!args[0]) Errors.throw('SayUsage', message.channel);
+        message.delete().catch(() => null);
         return message.channel.send(
-            new (require('discord.js')).MessageEmbed()
+            new Discord.MessageEmbed()
                 .setColor('#f7b2d9')
-                .setTitle('Uh oh!')
-                .setDescription('Invalid arguments given.\nUsage: `a!say <text>`'),
+                .setDescription(args.join(' '))
+                .setTimestamp()
+                .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true })),
         );
+    } catch (error) {
+        return Errors.throw('Generic', message.channel);
     }
-    if (message.guild?.me.hasPermission('MANAGE_MESSAGES')) {
-        message.delete();
-    }
-    return message.channel.send(
-        new (require('discord.js')).MessageEmbed()
-            .setColor('#f7b2d9')
-            .setDescription(args.join(' '))
-            .setTimestamp()
-            .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true })),
-    );
 };
