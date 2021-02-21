@@ -15,9 +15,6 @@ module.exports.run = async (message, args) => {
             .setColor('#f7b2d9')
             .setDescription(args.join(' '))
             .setTimestamp()
-            .setFooter(
-                `${message.author.tag}`,
-                `${message.author.displayAvatarURL({ dynamic: true })}`,
-            ),
+            .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true })),
     );
 };

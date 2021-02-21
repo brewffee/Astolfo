@@ -9,7 +9,7 @@ module.exports.run = async (message, args) => {
         .setColor('#f7b2d9')
         .setTitle(`Result for '${args.join(' ')}'`)
         .setImage(gif.url)
-        .setFooter(`Requested by ${message.author.username}`),
+        .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true })),
     );
   } catch (error) {
     Errors.throw('GifQuery', message.channel);

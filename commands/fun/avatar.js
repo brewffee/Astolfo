@@ -9,7 +9,8 @@ module.exports.run = async (message, args) => {
       new Discord.MessageEmbed()
         .setColor('#f7b2d9')
         .setImage(member.displayAvatarURL({ size: 4096, dynamic: true }))
-        .setTitle(`Avatar of ${member.username}`),
+        .setTitle(`Avatar of ${member.username}`)
+        .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true })),
     );
   } catch (error) {
     console.log(error);

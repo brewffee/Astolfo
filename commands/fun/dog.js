@@ -8,7 +8,7 @@ module.exports.run = async (message) => {
                 .setColor('#f7b2d9')
                 .setTitle('Woof :dog2:')
                 .setImage(gif.url)
-                .setFooter(`Requested by ${message.author.username}`),
+                .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true })),
         );
     } catch (error) {
         Errors.throw('DogNotFound', message.channel);
