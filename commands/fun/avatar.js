@@ -1,30 +1,17 @@
 module.exports.run = async (message, args) => {
-  const err = require('../../util/Errors.js'),
-    { getMember } = require('../../util/Member.js');
-  let member;
-  if (args[1]) {
-    // Check if too many arguments were given
-    return err.throw('AvatarUsage', message.channel);
-  }
-
-  args[0] ? member = await getMember(args[0], message.guild) : member = message.author.id;
-
-  // Find a GuildMember if all checks passed
-  let foundMember;
+  const Errors = require('../../util/Errors.js');
+  const Users = require('../../util/Users.js');
+  const Discord = require('discord.js');
   try {
-    foundMember = await message.guild.members.fetch({ user: member, force: true, cache: false });
-  } catch (E) {
-    if (E.message === 'Unknown Member') {
-      return err.throw('AvatarMember', message.channel);
-    }
+    if (args[1]) return Errors.throw('AvatarUsage', message.channel);
+    const member = args[0] ? await Users.fetch(args[0], message.client) : message.author;
+    message.channel.send(
+      new Discord.MessageEmbed()
+        .setColor('#f7b2d9')
+        .setImage(member.displayAvatarURL({ size: 4096, dynamic: true }))
+        .setTitle(`Avatar of ${member.username}`),
+    );
+  } catch (error) {
+    console.log(error);
   }
-  console.log(member);
-
-  // Retrieve and send the avatar
-  message.channel.send(
-    new (require('discord.js')).MessageEmbed()
-      .setColor('#f7b2d9')
-      .setImage(`${foundMember.user.displayAvatarURL({ size: 4096, dynamic: true })}`)
-      .setTitle(`Avatar of ${foundMember.user.username}`),
-  );
 };
