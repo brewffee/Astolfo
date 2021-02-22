@@ -2,7 +2,7 @@ module.exports.run = async (message, args) => {
   const Errors = require('../../util/Errors.js');
   const Discord = require('discord.js');
   try {
-    if (!args[0]) Errors.throw('SayUsage', message.channel);
+    if (!args[0]) return Errors.throw('SayUsage', message.channel);
     message.delete().catch(() => null);
     return message.channel.send(
       new Discord.MessageEmbed()
