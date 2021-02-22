@@ -1,28 +1,24 @@
 module.exports.run = async (message, args, flags) => {
-    const ms = require('ms'),
-        time = ms(args[0]),
-        config = require('../../config/config.json'),
-        errorEmbed = new (require('discord.js').MessageEmbed)()
-        .setColor('#f7b2d9')
-        .setTitle('Uh oh!');
-    if (!time || flags['dm']?.length >= 0 || (flags.size != 0 && !flags.dm)) {
-        message.channel.send(errorEmbed.setDescription('Invalid usage.\nUsage: `a!remind <time> [--dm] <message>`'));
-    } else if (time < 2147483647 && time > 999) {
-        const setEmbed = new (require('discord.js')).MessageEmbed()
-            .setTitle('Reminder set').setDescription(`You will be sent **"${args.slice(1).join(' ').replace(/`/g, '`\u200b')}"** in **${ms(time, { long: true })}**.`)
-            .setTimestamp(Date.now() + time);
-        if (config.debug) {
-            message.channel.send(
-                setEmbed.addField(
-                    'Input',
-                    `\`\`\`Message: ${message.content}\nReminder: ${args.slice(1).join(' ').replace(/`/g, '`\u200b')}\nTime: ${args[0]} [ms: ${ms(args[0])}]\nType: ${flags.dm ? 'DM' : 'Channel'}\`\`\``),
-            );
-        } else {
-            message.channel.send(setEmbed);
-        }
-
-        setTimeout(() => { flags.dm ? message.author.send(args.slice(1).join(' ')) : message.channel.send(args.slice(1).join(' '), { allowedMentions: { everyone: false, users: [message.author.id] } }); }, time);
-    } else {
-        message.channel.send(errorEmbed.setDescription('Time must be more than `1s` and less than `25d`\nUsage: `a!remind <time> [--dm] <message>`'));
-    }
+  const Errors = require('../../util/Errors.js');
+  const Discord = require('discord.js');
+  const ms = require('ms');
+  try {
+    if (!args[0] || !args[1] || flags['dm']?.length >= 0 || (Object.keys(flags).length > 0 && !flags.dm)) return Errors.throw('RemindUsage', message.channel);
+    const time = ms(args[0]);
+    if (!time) return Errors.throw('RemindUsage', message.channel);
+    if (time >= 2147483647 || time <= 999) return Errors.throw('RemindTime', message.channel);
+    const setEmbed = new Discord.MessageEmbed()
+      .setColor('#f7b2d9')
+      .setTitle('Reminder set')
+      .setDescription(`You will be sent **"${args.slice(1).join(' ').replace(/`/g, '`\u200b')}"** in **${ms(time, { long: true })}**.`)
+      .setTimestamp(Date.now() + time);
+    message.channel.send(setEmbed);
+    setTimeout(() => {
+      (flags.dm)
+        ? message.author.send(args.slice(1).join(' '))
+        : message.channel.send(args.slice(1).join(' '), { allowedMentions: { everyone: false, users: [message.author.id] } });
+    }, time);
+  } catch (error) {
+    console.log(error);
+  }
 };
