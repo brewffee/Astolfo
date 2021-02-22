@@ -3,7 +3,7 @@ module.exports.run = async (message, args) => {
   const Discord = require('discord.js');
   try {
     if (args[1]) null; // Errors.throw('NekoUsage', message.channel);
-    const { image } = (await (await require('node-fetch')('http://api.nekos.fun:8080/api/hentai')).json());
+    const { image } = (await (await require('node-fetch')('http://api.nekos.fun:8080/api/neko')).json());
     return message.channel.send(
       new Discord.MessageEmbed()
         .setTitle('Nekos!')
