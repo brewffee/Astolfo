@@ -1,13 +1,17 @@
 module.exports = {
     testInput(input) {
-        return /^(<@)?!?\d+>?$|@?.+#\d{4}/.test(input);
+        return /^(<@)?!?\d{17,}>?$|@?.+#\d{4}/.test(input);
     },
     async fetch(input, client) {
-        let id;
         if (!input || !client) return null;
-        /^(<@)?!?\d+>?$|@?.+#\d{4}/.test(input)
-            ? id = input.replace(/\D/g, '')
-            : null;
+        if (!/^(<@)?!?\d{17,}>?$|@?.+#\d{4}/.test(input)) return null;
+        const id = input.replace(/\D/g, '');
         return await client.users.fetch(id) || null;
+    },
+    async guildFetch(input, guild) {
+        if (!input || !guild) return null;
+        if (!/^(<@)?!?\d{17,}>?$|@?.+#\d{4}/.test(input)) return null;
+        const id = input.replace(/\D/g, '');
+        return await guild.members.fetch(id) || null;
     },
 };

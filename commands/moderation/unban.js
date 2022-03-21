@@ -1,96 +1,52 @@
-module.exports.run = async (message, args) => {
-  // Create the embeds
-  const errorEmbed = new (require('discord.js').MessageEmbed)()
-    .setColor('#f7b2d9')
-    .setTitle('Uh oh!');
-  // Permission and context checks
-  if (!message.guild && message.channel.type === 'dm') {
-    errorEmbed.setDescription('You\'re trying to use a guild-only command in a DM!');
-    return message.channel.send(errorEmbed);
-  } else if (!message.guild.member(message.author).permissions.has('BAN_MEMBERS')) {
-    errorEmbed.setDescription('You do not have permission to manage bans!');
-    return message.channel.send(errorEmbed);
-  } else if (!message.guild.me.permissions.has('BAN_MEMBERS')) {
-    errorEmbed.setDescription('I don\'t have permission to manage bans!');
-    return message.channel.send(errorEmbed);
-  }
-  // Define changing variables
-  let memberID, toPardon;
+const Errors = require('../../util/Errors.js');
+const Users = require('../../util/Users.js');
+const Discord = require('discord.js');
+const Command = require('../../util/Command');
 
-  // Check for a pardonReason to associate the unban with
-  let pardonReason;
-  args[1] ? (pardonReason = args.slice(1).join(' ').replace(/`/g, '`\u200b').trim()) : (pardonReason = 'No reason provided');
-
-  // Check for a GuildMember/User
-  if (!args[0]) {
-    // Check if no arguments were given
-    return message.channel.send(
-      errorEmbed.setDescription('Invalid usage.\nUsage: `a!unban <member> [reason]`'),
-    );
-  } else if (/(^<@?!)?(\d)(>$)/.test(args[0])) {
-    // Check if given argument is a mention
-    memberID = args[0].toString().replace(/\D/g, '');
-  } else if (/\d+$/.test(args[0])) {
-    // Check if given argument is a user ID
-    memberID = args[0].toString();
-  } else {
-    // Check if given argument does not match ID or mention format
-    return message.channel.send(
-      errorEmbed.setDescription('Invalid user specified.\nUsage: `a!unban <member> [reason]`'),
-    );
-  }
-
-  // Find a GuildMember if all checks passed
-  try {
-    toPardon = await message.guild.members.fetch({
-      user: memberID,
-      force: true,
-      cache: false,
-    });
-  } catch (E) {
-    if (E.message === 'Unknown User') {
-      // Stop if the user is invalid
-      return message.channel.send(
-        errorEmbed.setDescription('Invalid user specified.\nUsage: `a!unban <member> [reason]`'),
-      );
-    }
-  }
-
-  // Checks the member
-  if (toPardon == message.author.id) {
-    return message.channel.send(
-      errorEmbed.setDescription('If you\'re here, you\'re not banned 🤔'),
-    );
-  } else if (toPardon == message.guild.me.id) {
-    return message.channel.send(
-      errorEmbed.setDescription('I\'m already unbanned!'),
-    );
-  }
-
-  // Check if the user is banned
-  const bans = await message.guild.fetchBans();
-  if (JSON.stringify(bans).includes(memberID)) {
-    // Attempt to uban the user, send error if failed.
+module.exports = new Command({
+  name: 'unban',
+  description: 'Unbans a user from the server',
+  usage: 'a!unban <user> [reason]',
+  args: [
+    { name: 'user', optional: false, type: 'string' },
+    { name: 'reason', optional: true, type: 'string' },
+  ],
+  permissions: ['BAN_MEMBERS'],
+  access: {
+    guildOnly: true,
+    permissions: ['BAN_MEMBERS'],
+  },
+  run: async (message, args, flags) => {
+    let user;
+    let reason;
     try {
-      message.guild.members.unban(memberID, { days: 7, reason: pardonReason });
+      if (!args[0]) return Errors.throw('UnbanUsage', message.channel);
+      if (message.channel.type === 'dm') return Errors.throw('GuildOnly', message.channel);
+      if (!message.member.permissions.has('BAN_MEMBERS')) return Errors.throw('BanPermission', message.channel);
+      if (!message.guild.me.permissions.has('BAN_MEMBERS')) return Errors.throw('BanPermissionClient', message.channel);
+      user = await Users.fetch(args[0], message.client).catch(() => null);
+      if (!user) return Errors.throw('UnbanMember', message.channel);
+      reason = args.slice(1).join(' ').replace(/`/g, '`\u200b').trim() || 'No reason provided';
+      if (user === message.author) return Errors.throw('UnbanSelf', message.channel);
+      if (user === message.client.user) return Errors.throw('UnbanSelfClient', message.channel);
+      const bans = await message.guild.fetchBans();
+      if (!JSON.stringify(bans).includes(user.id)) {
+        return Errors.throw('UnbanUnbanned', message.channel);
+      }
+      try {
+        await message.guild.members.unban(user.id, reason);
+      } catch (error) {
+        console.log(error);
+        return Errors.throw('Unknown', message.channel);
+      }
+      return message.channel.send(
+        new Discord.MessageEmbed()
+          .setColor('#f7b2d9')
+          .setTitle('User successfully unbanned.')
+          .setDescription(`${user.username} will now be able to join the server.\n\`\`\`Reason: ${reason}\`\`\``)
+          .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true })));
     } catch (error) {
-      console.error;
-      message.channel.send(
-        errorEmbed.setDescription('An unknown error occured whilst trying to run that command! Please try again in a few seconds.'),
-      );
+      console.log(error);
     }
-    // Create the unban embed
-    const unbanEmbed = new (require('discord.js').MessageEmbed)()
-      .setColor('#f7b2d9')
-      .setTitle('User successfully unbanned.')
-      .setDescription(`This user will now be able to join the server.\n\`\`\`Reason: ${pardonReason}\`\`\``)
-      .setFooter(`Moderator: ${message.author.tag}`, message.author.displayAvatarURL());
-
-    // Send the embed
-    return message.channel.send(unbanEmbed);
-  } else {
-    return message.channel.send(
-      errorEmbed.setDescription('That user isn\'t banned!'),
-    );
-  }
-};
+  },
+});

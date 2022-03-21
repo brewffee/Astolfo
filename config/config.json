@@ -1,6 +1,5 @@
 {
   "version": "4.0.0-b202",
-  "prefix": "a!",
-  "disablePrefix": "-",
-  "debug": true
+  "prefix": "a?",
+  "debug": false
 }

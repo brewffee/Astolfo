@@ -1,0 +1,21 @@
+{
+  "con": {
+    "OK": "[ OK ] ",
+    "ERR": "[ ERR ] ",
+    "INFO": "[ INFO ] ",
+    "STOP": "[ STOP ] ",
+    "LINE": "\n===========================================\n",
+    "R": "[ <- ] ",
+    "S": "[ -> ] "
+  },
+  "net": {
+    "complete": "Authenticated.",
+    "disconnected": "Disconnected."
+  },
+  "ev": {
+    "ready": ["Astolfo@", " is ready!"],
+    "listening": ["Listening on ", " guilds!"],
+    "stopping": "Shutting down...",
+    "stopped": "Shutdown completed."
+  }
+}

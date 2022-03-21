@@ -1,7 +1,6 @@
 'use strict';
 
 const { Client, Collection } = require('discord.js'),
-  { con, ev } = require('./config/language.json'),
   config = require('./config/config.json'),
   client = new Client();
 client.commands = new Collection();
@@ -19,12 +18,13 @@ if (config.debug) {
 require('./handlers/Command').load(client);
 
 // CONSOLE ===============================================
-console.log(`${con.INFO}Finishing...`);
-process.on('SIGINT', async () => {
+console.log(`[ INFO ] Finishing...`);
+process.on('SIGINT', () => {
   client.emit('shutdown');
-
-}).on('exit', () => {
-  console.log(`${con.OK}${ev.stopped}`);
-});
+  setTimeout(() => {
+    console.log('Unable to shut down, forcibly closing process.');
+    process.exit();
+  }, 10e3);
+})
 
 client.login(process.env.TOKEN);
