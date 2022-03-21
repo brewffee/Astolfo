@@ -1,6 +1,5 @@
 .eslintrc.json
 .env
-config/config.json
 node_modules/*
 package.json
 pnpm-lock.yaml
