@@ -15,7 +15,7 @@ module.exports = new Command({
       if (args[1]) return Errors.throw('AvatarUsage', message.channel);
       const member = args[0] ? await Users.fetch(args[0], message.client) : message.author;
       const avatar = member.displayAvatarURL({ dynamic: true });
-      const downloads = [  
+      const downloads = [
         `${avatar.includes('.gif') ? `[GIF](${message.author.displayAvatarURL({ dynamic: true, size: 4096 })}) | ` : ''}` +
         `[JPG](${message.author.displayAvatarURL({ size: 4096, format: 'jpg' })}) | ` +
         `[PNG](${message.author.displayAvatarURL({ size: 4096, format: 'png' })}) | ` +

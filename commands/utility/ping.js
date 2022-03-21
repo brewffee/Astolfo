@@ -7,7 +7,7 @@ module.exports = new Command({
   usage: 'a!eval <code> [--return <any>]',
   args: [],
   run: async (message, args, flags) => {
-        const msg = await message.channel.send(
+    const msg = await message.channel.send(
       new Discord.MessageEmbed()
         .setDescription('Pinging... 📡'),
     );

@@ -67,12 +67,9 @@ module.exports = new Command({
         color: colors[post.rating],
         title: `[Flash] Result for ${args.join(' ')}`,
         url: `https://e621.net/posts/${post.id}`,
-        description: 
-        `**Adobe Flash has reached end of life, and no longer works in browsers. Please see [this thread](https://e621.net/forum_topics/22535) on the forum for details on how you can continue to play this file. **
+        description:
+          `**Adobe Flash has reached end of life, and no longer works in browsers. Please see [this thread](https://e621.net/forum_topics/22535) on the forum for details on how you can continue to play this file. **
         \n[#${post.id} - ${tags.slice(0, tags.lastIndexOf(' ')).replace(/_/g, '\\_')}](${post.file.url})`,
-        //thumbnail: {
-        //  url: post.preview.url,
-        //},
         footer: {
           text: `❤️ ${post.fav_count} | Score: ${post.score.total} | Artist: ${post.tags.artist[0] || 'Unknown'} | Post #${post.id}`
         },
