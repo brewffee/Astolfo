@@ -39,7 +39,7 @@ module.exports = new Command({
         return Errors.throw('BanExisting', message.channel);
       }
       try {
-        await user.send(`You have been banned from ${message.guild} for: ${reason}`/* ${appeal ? `You can appeal at ${appeal}` : ''} */).catch(() => unreachable = true);
+        //await user.send(`You have been banned from ${message.guild} for: ${reason}`/* ${appeal ? `You can appeal at ${appeal}` : ''} */).catch(() => unreachable = true);
         await message.guild.members.ban(user.id, { days: 7, reason: reason });
       } catch (error) {
         console.log(error);
